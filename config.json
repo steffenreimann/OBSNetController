@@ -1,0 +1,16 @@
+{
+  "obsnet": {
+    "ip": "localhost",
+    "port": "4444",
+    "pass": "040123"
+  },
+  "httpServer": {
+    "ip": "localhost",
+    "port": "8080"
+  },
+  "replay": {
+    "buffertime": "20000",
+    "bufsafet": "1000"
+  },
+  "username": "Steffen"
+}
