@@ -3,57 +3,47 @@ const path = require('path');
 const url = require('url');
 const editJsonFile = require("edit-json-file");
 var fs = require('fs');
+const OBSWebSocket = require('obs-websocket-js');
+const obs = new OBSWebSocket();
+
+
 //var index = require('./index.js');
 // If the file doesn't exist, the content will be an empty object by default.
-let config_file = editJsonFile(`${__dirname}/config.json`);
+let conf = editJsonFile('./config.json');
 try {
 'use strict';
 var os = require('os');
 var ifaces = os.networkInterfaces();
-var port = "8081"
 } catch (ex) {
     console.log(ex);
-   // console.log(ex.code)
     if(ex.code == 'MODULE_NOT_FOUND'){
 	    console.log('MODULE_NOT_FOUND')
-	    //exec("npm install ", puts);
     }
 }
 // SET ENV
 process.env.NODE_ENV = 'development';
-
 const {app, BrowserWindow, Menu, ipcMain} = electron;
-
 let mainWindow;
 let addWindow;
 
 // Listen for app to be ready
 app.on('ready', function(){
   // Create new window
-  mainWindow = new BrowserWindow({});
-//Lese Aus der JSON Datei wlchen wert firststart hat 
-console.log(config_file.get("firststart"));
-if(config_file.get("firststart") == true) {
-	console.log("Erster Start wird ausgeführt");
-	// Load html in window
-	  mainWindow.loadURL(url.format({
-	    pathname: path.join(__dirname, 'public/electron/configWindow.html'),
-	    protocol: 'file:',
-	    slashes:true
-	  }));
-    }else{
-	   console.log("Erster Start wurde bereits ausgeführt");
-	// Load html in window
-	   mainWindow.loadURL(url.format({
+    mainWindow = new BrowserWindow({});
+    
+    mainWindow.loadURL(url.format({
             pathname: path.join(__dirname, 'public/electron/mainWindow.html'),
             protocol: 'file:',
             slashes:true
 	  }));
-}
+    
+//console.log(config_file.get("firststart"));
+
 // Quit app when closed
   mainWindow.on('closed', function(){
     app.quit();
   });
+    
 // Build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert menu
@@ -67,11 +57,13 @@ function createAddWindow(){
     height:200,
     title:'OBS Net Control'
   });
+    
   addWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public/electron/addWindow.html'),
     protocol: 'file:',
     slashes:true
   }));
+    
   // Handle garbage collection
   addWindow.on('close', function(){
     addWindow = null;
@@ -143,7 +135,7 @@ if(process.env.NODE_ENV !== 'production'){
     ]
   });
 }
-var config = config_file.toObject()
+var config = conf.toObject()
 ipcMain.on('event', (event, data) => { 
    
 }) 
@@ -154,28 +146,121 @@ function loadHTML(data){
 	    slashes:true
 	}));
 }
+
+
 function setJSON(data) {
-	config_file.set(data.name, data.val);
+	conf.set(data.name, data.val);
 }
+
 ipcMain.on('DOM', (event, data) => {
            console.log("DOM Data : " + data);
 })
-// Output the content
-console.log(config_file.get());
-// { planet: 'Earth',
-//   name: { first: 'Johnny', last: 'B.' },
-//   is_student: false }
-// Save the data to the disk
-//config_file.save();
+
+ipcMain.on('OBC', (event, data) => {
+           console.log("DOM Data : " + data);
+            conf.set(data.cmd, data.d);
+            
+})
+ipcMain.on('OBC_CONNECT', (event, data) => {
+           console.log("DOM Data : " + data);
+            obsconnect()
+})
+
+ipcMain.on('OBC_CMD', (event, data) => {
+           console.log("OBC_CMD : " + JSON.stringify(data));
+           obs.send(data.cmd,data.d, (err, data) => {
+        console.log(err, data);
+    });
+})
+
+ipcMain.on('OBC_REPLAY', (event, data) => {
+           console.log("OBC_REPLAY : " + JSON.stringify(data));
+           var c = conf.get()
+           replay(c.replay)
+})
+
+ipcMain.on('start', (event, data) => {
+           console.log("OBC_REPLAY : " + JSON.stringify(data));
+           event.returnValue = conf.get()
+})
+
 // 
 // Reload it from the disk
-config_file = editJsonFile(`${__dirname}/config.json`, {
+conf = editJsonFile(`${__dirname}/config.json`, {
     autosave: true
 });
-setJSON({name: "username", val: "Steffen"})
+
+//setJSON({name: "username", val: "Steffen"})
+
  // Output the whole thing
 //console.log(config_file.toObject());
 // { planet: 'Earth',
 //   name: { first: 'Johnny', last: 'B.' },
 //   is_student: false,
 //   a: { new: { field: [Object] } } }
+
+
+function obsconnect(){
+    var c = conf.get()
+    console.log('Config = ip == ' + JSON.stringify(c));
+    //console.log('Config = pass == ' + c.obsnet.pass);
+    var obssock = false;
+
+    obs.connect({ address: c.obsnet.ip, password: c.obsnet.pass })
+        .then(() => {
+            console.log('Verbunden mit dem OBS Server ' + c.obsnet.ip );
+      })
+        .catch(err => { // Promise convention dicates you have a catch on every chain.
+            console.log(err);
+      });
+}
+
+//console.log('Config = Test == ' + tesst.obsnet.ip);
+
+
+obs.onSwitchScenes(data => {
+  console.log(`New Active Scene: ${data.sceneName}`);
+    
+});
+
+// You must add this handler to avoid uncaught exceptions.
+obs.on('error', err => {
+	console.error('socket error:', err);
+});
+
+function replay(data){
+    obs.SaveReplayBuffer();
+    //Umrechnung von Sekunden auf Milisekunden
+    var mstime = data.buffertime
+    mstime + data.bufsafet;
+    //Setzt Scene nach 'data' Sekunden auf die voherrige zurück
+    obs.getCurrentScene({}, (err, CurrentScene) => {
+        console.log("Current Scene:", err, CurrentScene.name);
+        setTimeout(function(){ 
+                swScene(CurrentScene.name)
+            }, mstime);
+    });
+    //Setzt Scene auf die Replay Scene
+    setTimeout(function(){ 
+            swScene('replay');
+        }, data.bufsafet); 
+}
+
+function swScene(data){
+    obs.setCurrentScene({'scene-name': data});
+}
+
+function test(){
+    console.log('test');
+    obs.send('GetCurrentScene',{}, (err, data) => {
+        console.log(err, data);
+    });
+    
+    
+    
+    
+}
+
+
+
+

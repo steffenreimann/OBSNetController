@@ -1,8 +1,8 @@
 {
   "obsnet": {
-    "ip": "localhost",
+    "ip": "localhost:4444",
     "port": "4444",
-    "pass": "040123"
+    "pass": "123123"
   },
   "httpServer": {
     "ip": "localhost",
@@ -10,7 +10,8 @@
   },
   "replay": {
     "buffertime": "20000",
-    "bufsafet": "1000"
+    "bufsavet": "1000",
+    "check": true
   },
   "username": "Steffen"
 }

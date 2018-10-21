@@ -53,29 +53,49 @@ ipcRenderer.on('split-info', function(event, data){
     function removeItem(e){
       console.log('hallo');
     }
-$( "#openfile-merge" ).click(function() {
-      ipcRenderer.send('openfile-merge', () => { 
-                console.log("Event sent."); 
-            })
+$( "#obssave" ).click(function() {
+      var ip = $( "#networkSectionIpAddress" ).val();
+  console.log('hallo');
+
+    ipcRenderer.send('OBC_CONNECT' , () => {})
+    send('OBC','obsnet', {'ip': ip, 'pass': '123123' });
   });    
-$( "#openfile-split" ).click(function() {
-      console.log('open');
-      open('file');
+$( "#replay_buffer" ).click(function() {
+      console.log('switch');
+   var checkbox = $('input[type=checkbox]').prop('checked')
+   var buffertime = $( "#buffertime" ).val();
+   var bufsavet = $( "#bufsavet" ).val();
+       
+    send('OBC','replay', {'check': checkbox, 'buffertime': buffertime, 'bufsavet': bufsavet });
+    
+    if(checkbox){
+       console.log('True'); 
+        send('OBC_CMD','StartReplayBuffer', {});
+    }else{
+       console.log('False'); 
+        send('OBC_CMD','StopReplayBuffer', {});
+    }
   });
-$( "#split-file" ).click(function() {
-      console.log('Split');
-    var path = $( "#out" ).val();
-    var packSize = $( "#packsize" ).val();
-    console.log(path)
-    ipcRenderer.send('saveSplitFile', {'path': path, 'name': 'ka', 'packSize': packSize } , () => { 
-                console.log("Event sent."); 
-            })
-   
+$( "#replaystart" ).click(function() {
+    var buffertime = $( "#buffertime" ).val();
+   var bufsavet = $( "#bufsavet" ).val();
+    send('OBC','replay', {'buffertime': buffertime, 'bufsavet': bufsavet });
+      
+   send('OBC_REPLAY');
     
   });
+
+
+
+
   
-ipcRenderer.on('fileData', (event, data) => { 
-    document.write(data) 
+ipcRenderer.on('start', (event, data) => { 
+    console.log(data); 
+    console.log(event); 
+    console.log("data.replay.buffertime = " + data.replay); 
+    $( "#buffertime" ).val(data.replay.buffertime);
+   $( "#bufsavet" ).val(data.replay.bufsavet);
+    
 })
 
 var options =  { 
@@ -92,16 +112,19 @@ var options =  {
             }             
         }};
 
-$('.ip_address').mask("000.000.000.000:00000", options);
+//$('.ip_address').mask("000.000.000.000:00000", options);
 
-    function replay(){
-        console.log('replay');
-        
-    }
+
     
-    function send(cmd){
-        
-    }
-    function swScene(data){
-        
-    }
+function send(name,cmd,d){
+    ipcRenderer.send(name, {'cmd': cmd, 'd': d } , () => { 
+            console.log("Event sent."); 
+        })
+}
+
+ var start = ipcRenderer.sendSync('start')
+     console.log(start); 
+
+ $( "#buffertime" ).val(start.replay.buffertime);
+   $( "#bufsavet" ).val(start.replay.bufsavet);
+ $( "#networkSectionIpAddress" ).val(start.obsnet.ip);
