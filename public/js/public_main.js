@@ -2,6 +2,9 @@
     const {ipcRenderer} = electron;
     const ul = document.querySelector('ul');
 
+var conlist = [];
+var ix = 0;
+var data1 = "";
 
     ipcRenderer.on('selectedFiles', function(e, data){
         console.log(data);
@@ -33,17 +36,15 @@ ipcRenderer.on('DOM', function(event, data){
     }
     });
 
-ipcRenderer.on('split-info', function(event, data){
-    console.log("File Size : " + data);
-    console.log("File time : " + data.time);
-    if(data.file.size != undefined){
-       $( "#size" ).val(data.size)
-       }
-    if(data.file.time != undefined){
-       $( "#time" ).val(data.time)
-       }
+ipcRenderer.on('LIST', function(event, data){
+    console.log('DATALIST');
+    console.log(data);
+   
     
-    
+    data.data.forEach(function(element) {
+      console.log(element);
+        list('#ergebnis', element.name)
+    });
      
     });
 
@@ -57,8 +58,10 @@ $( "#obssave" ).click(function() {
       var ip = $( "#networkSectionIpAddress" ).val();
   console.log('hallo');
 
-    ipcRenderer.send('OBC_CONNECT' , () => {})
+    
     send('OBC','obsnet', {'ip': ip, 'pass': '123123' });
+    send('OBC_CONNECT');
+    //ipcRenderer.send('OBC_CONNECT' , () => {})
   });    
 $( "#replay_buffer" ).click(function() {
       console.log('switch');
@@ -82,6 +85,21 @@ $( "#replaystart" ).click(function() {
     send('OBC','replay', {'buffertime': buffertime, 'bufsavet': bufsavet });
       
    send('OBC_REPLAY');
+    
+  });
+
+$( "#conn_switch" ).click(function() {
+    var checkbox = $('input[type=checkbox]').prop('checked')
+    
+    
+    
+    if(checkbox){
+       console.log('True'); 
+        send('OBC_CONNECT');
+    }else{
+       console.log('False'); 
+        send('OBC_DC');
+    }
     
   });
 
@@ -122,7 +140,55 @@ function send(name,cmd,d){
         })
 }
 
- var start = ipcRenderer.sendSync('start')
+function replaceAll(str,mapObj){
+    var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+
+    return str.replace(re, function(matched){
+        return mapObj[matched.toLowerCase()];
+    });
+}
+
+function list(name, data){
+    var model = require('./../electron/template.json');
+    model = model.html;
+    var mapObj = {ix:ix,data:data, idinput: "but" + data};
+    var testing = replaceAll(model,mapObj );
+    
+    ix++
+    if(conlist.length > 13){
+        console.log(conlist.length);
+        //conlist = conlist.slice(2,14);
+        
+    }
+    console.log(testing)
+    conlist.push(testing);
+    $(name).html(conlist);
+	checkboxBSC = $('form input[type=checkbox]:checked').val();
+    console.log(checkboxBSC)
+    scrolldown()
+}
+
+function scrolldown() {
+	var elem = document.getElementById('ergebnis');
+	elem.scrollTop = elem.scrollHeight;
+}
+
+function listdel() {
+    data1 = "";
+    conlist = [];
+    ix = 0;
+    console.log(data1 + ix);
+    $('#ergebnis').html(data1);
+}
+
+
+
+
+
+
+
+
+ var start = ipcRenderer.sendSync('NC_START')
      console.log(start); 
 
  $( "#buffertime" ).val(start.replay.buffertime);

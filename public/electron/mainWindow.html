@@ -34,13 +34,23 @@
 		</div>
 		<div id="collapseOne4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 			<div class="panel-body">
+                
                 <div class="form-group pmd-textfield">
                   <label for="networkSectionIpAddress" class="control-label">
                     OBS IP
                   </label>
                   <input type="text" id="networkSectionIpAddress" class="ip_address form-control" >
                 </div>
-                <button id="obssave" type="button" class="btn btn-primary"> Save </button >
+                <div class="col-xs-12">
+                    <button id="obssave" type="button" class="btn btn-primary"> Save </button >
+                    <div class="pmd-switch" >
+                        <label >
+                            <input id="conn_switch" type="checkbox">
+                            <span class="pmd-switch-label pmd-checkbox-ripple-effect"></span>
+                        </label>
+                    </div>
+                </div>
+               
             </div>
 		</div>
 	</div>
@@ -49,13 +59,13 @@
 			<h4 class="panel-title"><a  data-toggle="collapse" data-parent="#accordion4" href="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4"  data-expandable="false"><i class="material-icons pmd-sm pmd-accordion-icon-left">account_balance</i> Scenen</a> </h4>
 		</div>
 		<div id="collapseTwo4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-			<div class="panel-body"><p></p> 
+            <ul class='list-group pmd-z-depth pmd-list pmd-list-avatar pmd-card-list'>
+			<div id="ergebnis" class="panel-body"> 
+              
                
-                <!-- Animated progressbar of green color -->  
-<div class=" progress-rounded progress progress-striped pmd-progress active"><div class="progress-bar progress-bar-success" style="width: 0%;"></div></div>
 
             </div>
-            
+             </ul>
 		</div>
 	</div>
 	<div class="panel panel-info"> 

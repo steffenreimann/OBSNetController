@@ -145,6 +145,7 @@ function loadHTML(data){
 	    protocol: 'file:',
 	    slashes:true
 	}));
+    
 }
 
 
@@ -164,6 +165,7 @@ ipcMain.on('OBC', (event, data) => {
 ipcMain.on('OBC_CONNECT', (event, data) => {
            console.log("DOM Data : " + data);
             obsconnect()
+    
 })
 
 ipcMain.on('OBC_CMD', (event, data) => {
@@ -179,10 +181,23 @@ ipcMain.on('OBC_REPLAY', (event, data) => {
            replay(c.replay)
 })
 
-ipcMain.on('start', (event, data) => {
+ipcMain.on('NC_START', (event, data) => {
            console.log("OBC_REPLAY : " + JSON.stringify(data));
            event.returnValue = conf.get()
+    var c = conf.get()
+    mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
+ipcMain.on('NC_DISCONNECT', (event, data) => {
+           console.log('NC_DISCONNECT' + JSON.stringify(data));
+           event.returnValue = conf.get()
+        
+})
+ipcMain.on('NC_SCENESWITCH', (event, data) => {
+           console.log('NC_SCENESWITCH' + JSON.stringify(data));
+           
+            swScene(data);
+})
+
 
 // 
 // Reload it from the disk
@@ -209,10 +224,23 @@ function obsconnect(){
     obs.connect({ address: c.obsnet.ip, password: c.obsnet.pass })
         .then(() => {
             console.log('Verbunden mit dem OBS Server ' + c.obsnet.ip );
+        obs.GetSceneList({}, (err, Scene) => {
+        console.log("Scene:", err, Scene);
+        conf.set('scenes', Scene.scenes);
+        mainWindow.webContents.send('LIST', {"name": "scenes", "data": Scene.scenes} );
+
+    });
       })
         .catch(err => { // Promise convention dicates you have a catch on every chain.
             console.log(err);
       });
+    obs.on('OBC_DC', err => {
+        console.log('OBC Disconnect :');
+        if (obs.readyState === WebSocket.OPEN) {
+          obs.close();
+       }
+    });
+    
 }
 
 //console.log('Config = Test == ' + tesst.obsnet.ip);
@@ -247,7 +275,8 @@ function replay(data){
 }
 
 function swScene(data){
-    obs.setCurrentScene({'scene-name': data});
+    console.log(data);
+    obs.setCurrentScene({'scene-name': data.cmd});
 }
 
 function test(){
@@ -260,7 +289,6 @@ function test(){
     
     
 }
-
 
 
 

@@ -1,6 +1,6 @@
 {
   "obsnet": {
-    "ip": "localhost:4444",
+    "ip": "192.168.178.20:4444",
     "port": "4444",
     "pass": "123123"
   },
@@ -13,5 +13,192 @@
     "bufsavet": "1000",
     "check": true
   },
+  "scenes": [
+    {
+      "name": "StreamStart",
+      "sources": [
+        {
+          "cx": 1685,
+          "cy": 948,
+          "name": "Lets-Play-Fortnite-Bild",
+          "render": true,
+          "source_cx": 960,
+          "source_cy": 540,
+          "type": "image_source",
+          "volume": 1,
+          "x": 0,
+          "y": 43
+        }
+      ]
+    },
+    {
+      "name": "FortniteInGame",
+      "sources": [
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Lets Play Fortnite",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "ffmpeg_source",
+          "volume": 1,
+          "x": 0,
+          "y": 32
+        },
+        {
+          "cx": 715,
+          "cy": 536,
+          "name": "resteam chat",
+          "render": true,
+          "source_cx": 800,
+          "source_cy": 600,
+          "type": "browser_source",
+          "volume": 1,
+          "x": 965,
+          "y": 0
+        },
+        {
+          "cx": 734.8017578125,
+          "cy": 552.582275390625,
+          "name": "Browser",
+          "render": true,
+          "source_cx": 800,
+          "source_cy": 598,
+          "type": "browser_source",
+          "volume": 1,
+          "x": 0,
+          "y": 977
+        },
+        {
+          "cx": 1680,
+          "cy": 1050,
+          "name": "Spielaufnahme 3",
+          "render": true,
+          "source_cx": 1680,
+          "source_cy": 1050,
+          "type": "game_capture",
+          "volume": 1,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "name": "LOL Client und Game",
+      "sources": [
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Lets Play LOL",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "ffmpeg_source",
+          "volume": 1,
+          "x": 0,
+          "y": 40
+        },
+        {
+          "cx": 800,
+          "cy": 600,
+          "name": "resteam chat",
+          "render": true,
+          "source_cx": 800,
+          "source_cy": 600,
+          "type": "browser_source",
+          "volume": 1,
+          "x": 880,
+          "y": 0
+        },
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Spielaufnahme 2",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "game_capture",
+          "volume": 1,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "lolcliente",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "window_capture",
+          "volume": 1,
+          "x": 66,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "name": "Eagle",
+      "sources": []
+    },
+    {
+      "name": "Test",
+      "sources": [
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Lets Play Fortnite",
+          "render": false,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "ffmpeg_source",
+          "volume": 1,
+          "x": 0,
+          "y": 60
+        },
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Bildschirmaufnahme",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "monitor_capture",
+          "volume": 1,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "name": "replay",
+      "sources": [
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "replay-overlay",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "ffmpeg_source",
+          "volume": 0,
+          "x": 0,
+          "y": -668
+        },
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "replay-buffer",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "ffmpeg_source",
+          "volume": 0,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ],
   "username": "Steffen"
 }
