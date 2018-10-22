@@ -169,8 +169,8 @@ ipcMain.on('OBC_CONNECT', (event, data) => {
 })
 
 ipcMain.on('OBC_CMD', (event, data) => {
-           console.log("OBC_CMD : " + JSON.stringify(data));
-           obs.send(data.cmd,data.d, (err, data) => {
+    console.log("OBC_CMD : " + JSON.stringify(data));
+    obs.send(data.cmd,data.d, (err, data) => {
         console.log(err, data);
     });
 })
@@ -181,22 +181,30 @@ ipcMain.on('OBC_REPLAY', (event, data) => {
            replay(c.replay)
 })
 
-ipcMain.on('NC_START', (event, data) => {
-           console.log("OBC_REPLAY : " + JSON.stringify(data));
+ipcMain.on('NC_GET_CONF', (event, data) => {
+           console.log("OBC_Start : " + JSON.stringify(data));
            event.returnValue = conf.get()
-    var c = conf.get()
-    mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
+    //var c = conf.get()
+   // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
 ipcMain.on('NC_DISCONNECT', (event, data) => {
            console.log('NC_DISCONNECT' + JSON.stringify(data));
-           event.returnValue = conf.get()
+          
         
 })
 ipcMain.on('NC_SCENESWITCH', (event, data) => {
-           console.log('NC_SCENESWITCH' + JSON.stringify(data));
+           console.log('NC_SCENESWITCH = ' + data.cmd.trim());
            
-            swScene(data);
+            swScene(data.cmd.trim());
 })
+
+
+ipcMain.on('NC_SET_CONF', (event, data) => {
+    console.log('NC_CONF = ' + data);
+    conf.set(data);
+    mainWindow.webContents.send('NC_SET_CONF', data );
+})
+
 
 
 // 
@@ -234,12 +242,6 @@ function obsconnect(){
         .catch(err => { // Promise convention dicates you have a catch on every chain.
             console.log(err);
       });
-    obs.on('OBC_DC', err => {
-        console.log('OBC Disconnect :');
-        if (obs.readyState === WebSocket.OPEN) {
-          obs.close();
-       }
-    });
     
 }
 
@@ -276,7 +278,7 @@ function replay(data){
 
 function swScene(data){
     console.log(data);
-    obs.setCurrentScene({'scene-name': data.cmd});
+    obs.setCurrentScene({'scene-name': data});
 }
 
 function test(){

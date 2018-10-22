@@ -1,6 +1,6 @@
 {
   "obsnet": {
-    "ip": "192.168.178.20:4444",
+    "ip": "localhost:4444",
     "port": "4444",
     "pass": "123123"
   },
@@ -71,12 +71,12 @@
           "y": 977
         },
         {
-          "cx": 1680,
-          "cy": 1050,
+          "cx": 0,
+          "cy": 0,
           "name": "Spielaufnahme 3",
           "render": true,
-          "source_cx": 1680,
-          "source_cy": 1050,
+          "source_cx": 0,
+          "source_cy": 0,
           "type": "game_capture",
           "volume": 1,
           "x": 0,
