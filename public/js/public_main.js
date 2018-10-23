@@ -107,10 +107,18 @@ function list(name, data){
     var sourcelist = [];
    
    if(data.sources != undefined ){
+       var visbol
        data.sources.forEach(function(element) {
            //model.sources.length
           console.log(element);
-           var sourcesmapObj = {sourcename:element.name,sourcevol:element.volume, sourcerender: element.render};
+           
+           
+           if(element.render){
+                visbol = 'visibility'
+              }else{
+                visbol = 'visibility_off'
+              }
+           var sourcesmapObj = {sourcename:element.name,sourcevol:element.volume, sourcerender: element.render, vissourcename: "vis" + element.name, visbol: visbol};
            
              var source = replaceAll(model.source,sourcesmapObj );
            sourcelist.push(source);

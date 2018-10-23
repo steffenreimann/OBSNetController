@@ -198,6 +198,11 @@ ipcMain.on('NC_SCENESWITCH', (event, data) => {
            
             swScene(data.cmd.trim());
 })
+ipcMain.on('NC_SOURCESW', (event, data) => {
+           console.log('NC_SOURCESW = ' + data.cmd.trim());
+           
+            swScene(data.cmd.trim());
+})
 
 
 ipcMain.on('NC_SET_CONF', (event, data) => {

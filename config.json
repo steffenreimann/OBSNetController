@@ -42,7 +42,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 1,
+          "volume": 0.16637501120567322,
           "x": 0,
           "y": 32
         },
@@ -71,12 +71,12 @@
           "y": 977
         },
         {
-          "cx": 0,
-          "cy": 0,
+          "cx": 1680,
+          "cy": 1050,
           "name": "Spielaufnahme 3",
           "render": true,
-          "source_cx": 0,
-          "source_cy": 0,
+          "source_cx": 1680,
+          "source_cy": 1050,
           "type": "game_capture",
           "volume": 1,
           "x": 0,
@@ -152,7 +152,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 1,
+          "volume": 0.16637501120567322,
           "x": 0,
           "y": 60
         },
