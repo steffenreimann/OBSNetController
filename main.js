@@ -34,7 +34,8 @@ app.on('ready', function(){
     mainWindow.loadURL(url.format({
             pathname: path.join(__dirname, 'public/electron/mainWindow.html'),
             protocol: 'file:',
-            slashes:true
+            slashes:true,
+        title:'OBS Net Control'
 	  }));
     
 //console.log(config_file.get("firststart"));

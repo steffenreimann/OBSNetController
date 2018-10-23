@@ -11,7 +11,7 @@
   "replay": {
     "buffertime": "20000",
     "bufsavet": "1000",
-    "check": true
+    "check": false
   },
   "scenes": [
     {
@@ -194,6 +194,23 @@
           "source_cy": 0,
           "type": "ffmpeg_source",
           "volume": 0,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "name": "Szene 2",
+      "sources": [
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Lets Play LOL",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "ffmpeg_source",
+          "volume": 1,
           "x": 0,
           "y": 0
         }

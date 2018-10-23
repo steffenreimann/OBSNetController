@@ -38,7 +38,7 @@ ipcRenderer.on('LIST', function(event, data){
     console.log(data);
     data.data.forEach(function(element) {
       console.log(element);
-        list('#ergebnis', element.name)
+        list('#ergebnis', element)
     }); 
     
     conlist = [];
@@ -103,17 +103,27 @@ function send(name,cmd,d){
 function list(name, data){
     
    var model = require('./../electron/template.json');
-   var model = model.html;
-   var model 
+   //var model = model.html;
+    var sourcelist = [];
    
+   if(data.sources != undefined ){
+       data.sources.forEach(function(element) {
+           //model.sources.length
+          console.log(element);
+           var sourcesmapObj = {sourcename:element.name,sourcevol:element.volume, sourcerender: element.render};
+           
+             var source = replaceAll(model.source,sourcesmapObj );
+           sourcelist.push(source);
+        }); 
+      }
         
-        
-         console.log('HTML Model Test === ' + model);
-    var mapObj = {ix:ix,data:data, idinput: "but" + data};
-    var testing = replaceAll(model,mapObj );
+   console.log('HTML Model Test === ' + model);
+    var mapObj = {ix:ix,data:data.name, idinput: "but" + data.name, sources: sourcelist};
+    var scene = replaceAll(model.html,mapObj );
     ix++
     //console.log(testing)
-    conlist.push(testing);
+    conlist.push(scene);
+    
     $(name).html(conlist);
 	checkboxBSC = $('form input[type=checkbox]:checked').val();
     //console.log(checkboxBSC)
