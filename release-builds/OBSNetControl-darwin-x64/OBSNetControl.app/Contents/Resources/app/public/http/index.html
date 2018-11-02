@@ -1,0 +1,47 @@
+<html>
+<head>
+    
+</head>
+<body>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="replay()">REPLAY</button>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="send('StartStreaming')">Start</button>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="send('StopStreaming')">Stop</button>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="swScene('FortniteInGame')">Fortnite</button>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="swScene('LOL Client und Game')">LOL</button>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="swScene('StreamStart')">StreamStart Scene</button>
+    <button style="height: 50px; width: 200px; background-color: aqua" onclick="swScene('Test')">Test</button>
+</body>
+    
+<script src="../js/jquery-3.3.1.min.js"></script>     
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/socket.io/dist/socket.io.js"></script>
+<script>
+    
+    
+    socket = io.connect();
+    
+    socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('cmd', { cmd: 'GetCurrentScene'});
+    });
+       
+    socket.on('cmd', function (data) {
+            console.log(data);
+    });
+    
+    function replay(){
+        console.log('replay');
+        socket.emit('replay');
+    }
+    
+    function send(cmd){
+        socket.emit('cmd', { cmd: cmd});
+    }
+    function swScene(data){
+        socket.emit('swScene', data);
+    }
+    </script>
+    
+</html>
+
+

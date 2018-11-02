@@ -158,6 +158,12 @@
     }
   },
   "4": {
+    "54": {
+      "channel": 4,
+      "note": 54,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
     "undefined": {
       "channel": 4,
       "controller": 7,
