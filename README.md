@@ -40,7 +40,13 @@ npm install
 npm run rebuild
 ``` 
 ```
-5. Build for your OS
+5.
+
+npm start
+``` 
+
+```
+Build for your OS
 
 npm run package-mac
 or
