@@ -1,0 +1,232 @@
+{
+  "0": {
+    "52": {
+      "channel": 0,
+      "note": 52,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "53": {
+      "channel": 0,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "54": {
+      "channel": 0,
+      "note": 54,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "55": {
+      "channel": 0,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "56": {
+      "channel": 0,
+      "note": 56,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "57": {
+      "channel": 0,
+      "note": 57,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "undefined": {
+      "channel": 0,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "1": {
+    "53": {
+      "channel": 1,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "56": {
+      "channel": 1,
+      "note": 56,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "57": {
+      "channel": 1,
+      "note": 57,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "undefined": {
+      "channel": 1,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "2": {
+    "52": {
+      "channel": 2,
+      "note": 52,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "53": {
+      "channel": 2,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "54": {
+      "channel": 2,
+      "note": 54,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "55": {
+      "channel": 2,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "56": {
+      "channel": 2,
+      "note": 56,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "57": {
+      "channel": 2,
+      "note": 57,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "undefined": {
+      "channel": 2,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "3": {
+    "52": {
+      "channel": 3,
+      "note": 52,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "53": {
+      "channel": 3,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "54": {
+      "channel": 3,
+      "note": 54,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "55": {
+      "channel": 3,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "56": {
+      "channel": 3,
+      "note": 56,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "57": {
+      "channel": 3,
+      "note": 57,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "undefined": {
+      "channel": 3,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "4": {
+    "undefined": {
+      "channel": 4,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "5": {
+    "52": {
+      "channel": 5,
+      "note": 52,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "55": {
+      "channel": 5,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "56": {
+      "channel": 5,
+      "note": 56,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "57": {
+      "channel": 5,
+      "note": 57,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "undefined": {
+      "channel": 5,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "6": {
+    "55": {
+      "channel": 6,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "undefined": {
+      "channel": 6,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "7": {
+    "undefined": {
+      "channel": 7,
+      "controller": 7,
+      "value": 0,
+      "_type": "cc"
+    }
+  },
+  "Akai APC20 0": {
+    "channel": 0,
+    "note": 55,
+    "velocity": 127,
+    "_type": "noteoff"
+  },
+  "channel": 5,
+  "note": 53,
+  "velocity": 127,
+  "_type": "noteoff"
+}

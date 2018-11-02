@@ -7,3 +7,5 @@ The Electron App should connect to an OBS-Websocket server and be able to proces
 
 
 https://github.com/nodejs/node-gyp#installation
+
+https://www.npmjs.com/package/electron-rebuild

@@ -45,6 +45,15 @@ ipcRenderer.on('LIST', function(event, data){
     ix = 0;
 });
 
+ipcRenderer.on('MIDI_Mapping', function(event, data){
+    
+    console.log('MIDI_Mapping');
+    console.log(data);
+    
+    
+   
+});
+
 
 $( "#obssave" ).click(function() {
       var ip = $( "#networkSectionIpAddress" ).val();

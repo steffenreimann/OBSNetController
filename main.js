@@ -5,11 +5,49 @@ const editJsonFile = require("edit-json-file");
 var fs = require('fs');
 const OBSWebSocket = require('obs-websocket-js');
 const obs = new OBSWebSocket();
+var easymidi = require('easymidi');
+
+let conf = editJsonFile('./config.json');
+let MIDImapping = editJsonFile('./mapping.json');
+var device
+
+// Reload it from the disk
+conf = editJsonFile(`${__dirname}/config.json`, {
+    autosave: true
+});
+MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
+    autosave: true
+});
+
+
+
+// Monitor all MIDI inputs with a single "message" listener
+easymidi.getInputs().forEach(function(inputName){
+  device = new easymidi.Input(inputName);
+    
+mapping(inputName)
+
+   
+    
+});
+
+function mapping(inputName){
+    device.on('message', function (msg) {
+    var vals = Object.keys(msg).map(function(key){return key+": "+msg[key];});
+    console.log(inputName+": "+vals.join(', '));
+    mainWindow.webContents.send('MIDI_Mapping', msg );
+        
+        
+        MIDImapping.set(msg.channel + '.' + msg.note, msg);
+  });
+    
+    
+}
 
 
 //var index = require('./index.js');
 // If the file doesn't exist, the content will be an empty object by default.
-let conf = editJsonFile('./config.json');
+
 try {
 'use strict';
 var os = require('os');
@@ -77,20 +115,6 @@ const mainMenuTemplate =  [
     label: 'File',
     submenu:[         
       {
-        label:'Split File',
-        accelerator:process.platform == 'darwin' ? 'Command+S' : 'Ctrl+S',
-        click(){
-          
-        }
-      },
-      {
-        label:'Merge Files',
-        accelerator:process.platform == 'darwin' ? 'Command+M' : 'Ctrl+M',
-        click(){
-          
-        }
-      },
-      {
         label: 'Quit',
         accelerator:process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
         click(){
@@ -109,20 +133,7 @@ if(process.env.NODE_ENV !== 'production'){
   mainMenuTemplate.push({
     label: 'Developer Tools',
     submenu:[
-        {
-        label:'Home',
-        accelerator:process.platform == 'darwin' ? 'Command+H' : 'Ctrl+H',
-        click(){
-          loadHTML('public/mainWindow.html');
-        }
-      }, 
-	  {
-        label: 'Config',
-        accelerator:process.platform == 'darwin' ? 'Command+K' : 'Ctrl+K',
-        click(){
-          loadHTML('public/configWindow.html');
-        }
-      },
+        
       {
         role: 'reload'
       },
@@ -214,10 +225,7 @@ ipcMain.on('NC_SET_CONF', (event, data) => {
 
 
 // 
-// Reload it from the disk
-conf = editJsonFile(`${__dirname}/config.json`, {
-    autosave: true
-});
+
 
 //setJSON({name: "username", val: "Steffen"})
 
