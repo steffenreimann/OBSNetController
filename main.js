@@ -19,26 +19,19 @@ MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
     autosave: true
 });
 
-
-
 // Monitor all MIDI inputs with a single "message" listener
 easymidi.getInputs().forEach(function(inputName){
-  device = new easymidi.Input(inputName);
-    
-mapping(inputName)
-
-   
-    
+    device = new easymidi.Input(inputName);
+    mapping(inputName)
 });
 
 function mapping(inputName){
     device.on('message', function (msg) {
-    var vals = Object.keys(msg).map(function(key){return key+": "+msg[key];});
-    console.log(inputName+": "+vals.join(', '));
-    mainWindow.webContents.send('MIDI_Mapping', msg );
+        var vals = Object.keys(msg).map(function(key){return key+": "+msg[key];});
+        console.log(inputName+": "+vals.join(', '));
+        mainWindow.webContents.send('MIDI_Mapping', msg );
         
-        
-        MIDImapping.set(msg.channel + '.' + msg.note, msg);
+        MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
   });
     
     
@@ -199,6 +192,12 @@ ipcMain.on('NC_GET_CONF', (event, data) => {
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
+ipcMain.on('MIDIMapping', (event, data) => {
+           //console.log("OBC_Start : " + JSON.stringify(data));
+           event.returnValue = MIDImapping.get()
+    //var c = conf.get()
+   // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
+})
 ipcMain.on('NC_DISCONNECT', (event, data) => {
            console.log('NC_DISCONNECT' + JSON.stringify(data));
           
@@ -220,6 +219,11 @@ ipcMain.on('NC_SET_CONF', (event, data) => {
     console.log('NC_CONF = ' + data);
     conf.set(data);
     mainWindow.webContents.send('NC_SET_CONF', data );
+})
+ipcMain.on('NC_SET_MAP', (event, data) => {
+    console.log('NC_MAP = ' + data);
+    MIDImapping.set(data);
+    //mainWindow.webContents.send('NC_SET_CONF', data );
 })
 
 

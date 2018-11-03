@@ -3,8 +3,11 @@
     
 
 var conf = ipcRenderer.sendSync('NC_GET_CONF')
- 
-var conlist = [];
+var MIDIMapping
+ var midilist = [];
+var conlist0 = [];
+var conlist1 = [];
+var mapObj1
 var ix = 0;
 var data1 = "";
 console.log(conf);
@@ -41,15 +44,15 @@ ipcRenderer.on('LIST', function(event, data){
         list('#ergebnis', element)
     }); 
     
-    conlist = [];
+    conlist0 = [];
     ix = 0;
 });
 
 ipcRenderer.on('MIDI_Mapping', function(event, data){
-    
+    //conlist1.push(scene);
     console.log('MIDI_Mapping');
     console.log(data);
-    
+    list('#out', data)
     
    
 });
@@ -89,7 +92,7 @@ $( "#replaystart" ).click(function() {
     
   });
 
-$( "#conn_switch" ).click(function() {
+$( "#saveMIDIMapping" ).click(function() {
     var checkbox = $('input[type=checkbox]').prop('checked')
     if(checkbox){
        console.log('True'); 
@@ -101,6 +104,17 @@ $( "#conn_switch" ).click(function() {
     
   });
 
+$( "#conn_switch" ).click(function() {
+    var checkbox = $('input[type=checkbox]').prop('checked')
+    if(checkbox){
+       console.log('True'); 
+        send('OBC_CONNECT');
+    }else{
+       console.log('False'); 
+        send('OBC_DC');
+    }
+    
+  });
     
 function send(name,cmd,d){
     ipcRenderer.send(name, {'cmd': cmd, 'd': d } , () => { 
@@ -108,6 +122,26 @@ function send(name,cmd,d){
         })
 }
 
+function loadMIDIMapping(){
+    MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
+    
+    $.each(MIDIMapping, function(i, item) {
+        $.each(item, function(ii, itemm) {
+            console.log(itemm);
+            list('#out', itemm)
+        });
+    });
+    
+    
+    console.log(MIDIMapping);
+   // list('#out', data)
+}
+function saveMIDIMapping(){
+    
+    console.log(MIDIMapping);
+    
+   // list('#out', data)
+}
 
 function list(name, data){
     
@@ -115,7 +149,7 @@ function list(name, data){
    //var model = model.html;
     var sourcelist = [];
    
-   if(data.sources != undefined ){
+    if(data.sources != undefined ){
        var visbol
        data.sources.forEach(function(element) {
            //model.sources.length
@@ -131,26 +165,73 @@ function list(name, data){
            
              var source = replaceAll(model.source,sourcesmapObj );
            sourcelist.push(source);
+           
+           
         }); 
+        console.log('HTML Model Test === ' + model);
+        var mapObj = {ix:ix,data:data.name, idinput: "but" + data.name, sources: sourcelist};
+        var scene = replaceAll(model.html,mapObj );
+        conlist0.push(scene);
+        $(name).html(conlist0);
       }
+    
+    if(data.channel != undefined ){
         
-   console.log('HTML Model Test === ' + model);
-    var mapObj = {ix:ix,data:data.name, idinput: "but" + data.name, sources: sourcelist};
-    var scene = replaceAll(model.html,mapObj );
+            var mapObj1 = {MIDIMapID: 'halolol', Scene: 'Scene Die 4' };
+            var MIDI_Mapping = replaceAll(model.MIDIMapping, mapObj1 );
+            alert( 'FIND = ' + MIDI_Mapping);
+        
+            var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + ' // Note: ' + data.note + ' // CMD: ' + data._type + '' + MIDI_Mapping, idinput: 'blnk' + data.channel + data.note + data._type, sources: '' };
+            var scene = replaceAll(model.html,mapObj );
+        
+        //alert( 'FIND = ' + findInArray(conlist1, scene)); // 
+        
+        if(findInArray(conlist1, scene)){
+            var id = "#blnk" + data.channel + data.note + data._type
+            console.log('HTML id = ' + id);
+               
+             
+            $(id).addClass("list-group-item-success");
+            //$(id).css({"background-color": "blue", "font-size": "100%"});
+            setTimeout(function(){ 
+               //$(id).css({"background-color": "red", "font-size": "100%"});
+                $(id).removeClass("list-group-item-success");
+            }, 500);
+            
+            
+           }else{
+                conlist1.push(scene);
+                $(name).html(conlist1);
+           }
+        
+        
+    }; 
+        
+    
+
+    
     ix++
     //console.log(testing)
-    conlist.push(scene);
+   
     
-    $(name).html(conlist);
 	checkboxBSC = $('form input[type=checkbox]:checked').val();
     //console.log(checkboxBSC)
-    scrolldown()
+    
 };
      //model = model.toString()
     
 
- 
-
+// function to search array using for loop
+function findInArray(ar, val) {
+    for (var i = 0,len = ar.length; i < len; i++) {
+        if ( ar[i] === val ) { // strict equality test
+            //return i;
+            return true;
+        }
+    }
+    //return -1;
+    return false;
+}
 
 function replaceAll(str,mapObj){
     var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
@@ -161,8 +242,15 @@ function replaceAll(str,mapObj){
 }
 
 function scrolldown() {
-	var elem = document.getElementById('ergebnis');
+	var elem = $(window).scrollTop()
+	var elemb = $(window).scrollBottom()
+    
+    console.log(elem);
+    console.log(elemb);
 	elem.scrollTop = elem.scrollHeight;
+    
+    $('html, body').animate({scrollTop: $elem.height()}, 800);
+    
 }
 
 function listdel() {
