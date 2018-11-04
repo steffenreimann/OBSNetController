@@ -89,6 +89,7 @@ $( "#replaystart" ).click(function() {
    send('OBC_REPLAY');
     
   });
+$( "#sendjsontest" ).click(function() {send('sendjsontest','replay');});
 
 $( "#saveMIDIMapping" ).click(function() {
     var checkbox = $('input[type=checkbox]').prop('checked')
@@ -149,8 +150,9 @@ function saveMIDIMapping(){
             
             var ch_cmd = document.getElementById(midimapid);
             var ch_val = document.getElementById(midimapval);
-            
-            var mapp = {channel: itemm.channel, note: itemm.note, velocity: itemm.velocity, _type: itemm._type, cmds: ch_cmd.value, val: ch_val.value }
+            var ch_cmdval = []
+            ch_cmdval.push(ch_cmd.value)
+            var mapp = {channel: itemm.channel, note: itemm.note, velocity: itemm.velocity, _type: itemm._type, cmds: ch_cmdval, val: ch_val.value }
             //mapp = mapp.cmds.push(ch_cmd.value);
             
             console.log(ch_cmd.value);

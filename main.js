@@ -34,23 +34,68 @@ function mapping(inputName){
         
   });
     
-  device.on('message', function (msg) {
-   var i = msg.channel + '.' + msg.note + msg._type
-   var a = MIDImapping.get(i)
-      if(a.cmds != 'undefined' && a.val != 'undefined'){
-            console.log('a.cmds : ' + a.cmds);
-            console.log('a.val : ' + a.val);
-            obs.send(a.cmds, a.val , (err, data) => {
-                console.log(err, data);
-                
-            });
-      }
+    device.on('message', function (msg) {
+        var i = msg.channel + '.' + msg.note + msg._type
+        var a = MIDImapping.get(i)
         
-});
-    
+        if(boll(a,msg)){
+            console.log('Testing msg Check= ' + a)
+            
+            a.cmds.forEach(function(element) {
+                console.log(element);
+            });
+       
+            obs.send(a.cmds, a.val , (err, data) => {
+                console.log(err, data);   
+            });
+            
+        }       
+    }); 
 }
 
+function MIDI(){
+    var MIDIdevice
+    easymidi.getInputs().forEach(function(inputName){
+        MIDIdevice = new easymidi.Input(inputName);
+    });
+    MIDIdevice.on('message', function (msg) {
+        var i = msg.channel + '.' + msg.note + msg._type
+        var a = MIDImapping.get(i)
+        if(boll(a,msg)){
+            console.log('Testing msg Check= ' + a)
+            
+            a.cmds.forEach(function(element) {
+                console.log(element);
+            });
+        }  
+    });
+}
 
+function boll(a, b){
+    if(a.channel == b.channel && a.note == b.note && a._type == b._type){
+        return true
+    }else{
+        return false
+    }
+}
+
+function testing(msg){
+    
+    var i = msg.channel + '.' + msg.note + msg._type
+    var a = MIDImapping.get(i)
+   
+    console.log('Testing msg = ' + msg.channel)
+    console.log('Testing a = ' + a.channel)
+    
+    if(boll(a,msg)){
+            console.log('Testing msg Check= ' + a)
+            
+            a.cmds.forEach(function(element) {
+                console.log(element);
+            });
+            
+        }
+}
 
 
 //var index = require('./index.js');
@@ -240,6 +285,16 @@ ipcMain.on('NC_SET_MAP', (event, data) => {
     //MIDImapping.set(data);
     MIDImapping.set(data.d.channel + '.' + data.d.note + data.d._type, data.d)
     //mainWindow.webContents.send('NC_SET_CONF', data );
+})
+
+ipcMain.on('sendjsontest', (event, data) => {
+    console.log('sendjsontest = ' + data);
+    
+    var s = {"channel": 6,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteon"}
+    testing(s);
 })
 
 
