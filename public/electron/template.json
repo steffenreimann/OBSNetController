@@ -1,4 +1,4 @@
 {"html": 
  "<li id='idinput' class=' pmd-z-depth pmd-list  list-group-item'><div class='media-left'><i  onclick='send(\"NC_SCENESWITCH\",\"data\");' class='material-icons md-dark pmd-md'>skip_next</i></a></div><div class='media-body media-middle'>  data option</div><i class='  media-middle '>sources</i></li>",
 "source":"<i id='vissourcename' onclick='send(\"NC_SOURCESW\",\"sourcename\")' class='material-icons md-dark pmd-sm'>visbol</i> sourcename ",
-"MIDIMapping":"<div class='form-group pmd-textfield pmd-textfield-floating-label'><select id=' MIDIMapID ' class='select-with-search form-control pmd-select2'><option></option><option>Start Replay</option><option>Scene</option></select></div>"}
+"MIDIMapping":"<input type='text' id='midimapval' class='form-control' value='midimapouttext' ><div class='form-group pmd-textfield pmd-textfield-floating-label'><select id='midimapid' class='form-control pmd-select2' vlaue='midimapoutselect'><option value='midimapoutselect'>midimapoutselect</option><option value='SetCurrentScene'>SetCurrentScene</option><option value='GetCurrentScene'>GetCurrentScene</option></select></div>"}

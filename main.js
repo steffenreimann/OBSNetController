@@ -28,14 +28,29 @@ easymidi.getInputs().forEach(function(inputName){
 function mapping(inputName){
     device.on('message', function (msg) {
         var vals = Object.keys(msg).map(function(key){return key+": "+msg[key];});
-        console.log(inputName+": "+vals.join(', '));
+        //console.log(inputName+": "+vals.join(', '));
         mainWindow.webContents.send('MIDI_Mapping', msg );
-        
         MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
+        
   });
     
+  device.on('message', function (msg) {
+   var i = msg.channel + '.' + msg.note + msg._type
+   var a = MIDImapping.get(i)
+      if(a.cmds != 'undefined' && a.val != 'undefined'){
+            console.log('a.cmds : ' + a.cmds);
+            console.log('a.val : ' + a.val);
+            obs.send(a.cmds, a.val , (err, data) => {
+                console.log(err, data);
+                
+            });
+      }
+        
+});
     
 }
+
+
 
 
 //var index = require('./index.js');
@@ -221,8 +236,9 @@ ipcMain.on('NC_SET_CONF', (event, data) => {
     mainWindow.webContents.send('NC_SET_CONF', data );
 })
 ipcMain.on('NC_SET_MAP', (event, data) => {
-    console.log('NC_MAP = ' + data);
-    MIDImapping.set(data);
+    console.log('NC_MAP = ' + data.channel);
+    //MIDImapping.set(data);
+    MIDImapping.set(data.d.channel + '.' + data.d.note + data.d._type, data.d)
     //mainWindow.webContents.send('NC_SET_CONF', data );
 })
 

@@ -215,6 +215,23 @@
           "y": 0
         }
       ]
+    },
+    {
+      "name": "Destiny2",
+      "sources": [
+        {
+          "cx": 0,
+          "cy": 0,
+          "name": "Destiny2Game",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "game_capture",
+          "volume": 1,
+          "x": 0,
+          "y": 0
+        }
+      ]
     }
   ],
   "username": "Steffen"

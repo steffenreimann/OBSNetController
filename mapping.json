@@ -1,18 +1,4 @@
 {
-  "4": {
-    "53noteon": {
-      "channel": 4,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon"
-    },
-    "53noteoff": {
-      "channel": 4,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff"
-    }
-  },
   "5": {
     "53noteon": {
       "channel": 5,
@@ -46,13 +32,17 @@
       "channel": 7,
       "note": 53,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": "GetCurrentScene",
+      "val": ""
     },
     "53noteoff": {
       "channel": 7,
       "note": 53,
       "velocity": 127,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": "undefined",
+      "val": "undefined"
     }
   }
 }

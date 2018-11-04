@@ -1,4 +1,4 @@
-"availableEvents": [
+{"availableEvents": [
     "SwitchScenes",
     "ScenesChanged",
     "SceneCollectionChanged",
@@ -102,4 +102,4 @@
     "GetCurrentTransition",
     "SetCurrentTransition",
     "SetTransitionDuration",
-    "GetTransitionDuration"
+    "GetTransitionDuration"]}

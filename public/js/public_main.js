@@ -53,8 +53,6 @@ ipcRenderer.on('MIDI_Mapping', function(event, data){
     console.log('MIDI_Mapping');
     console.log(data);
     list('#out', data)
-    
-   
 });
 
 
@@ -123,8 +121,10 @@ function send(name,cmd,d){
 }
 
 function loadMIDIMapping(){
+    var conlist1 = [];
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
-    
+                console.log(MIDIMapping);
+
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
             console.log(itemm);
@@ -137,8 +137,29 @@ function loadMIDIMapping(){
    // list('#out', data)
 }
 function saveMIDIMapping(){
+    MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     
-    console.log(MIDIMapping);
+    //console.log(MIDIMapping);
+    
+    $.each(MIDIMapping, function(i, item) {
+        $.each(item, function(ii, itemm) {
+            
+            var midimapid = "#midimapid" + itemm.channel + itemm.note + itemm._type
+            var midimapval = "#midimapval" + itemm.channel + itemm.note + itemm._type
+            
+            var ch_cmd = document.getElementById(midimapid);
+            var ch_val = document.getElementById(midimapval);
+            
+            var mapp = {channel: itemm.channel, note: itemm.note, velocity: itemm.velocity, _type: itemm._type, cmds: ch_cmd.value, val: ch_val.value }
+            //mapp = mapp.cmds.push(ch_cmd.value);
+            
+            console.log(ch_cmd.value);
+            console.log(mapp);
+            
+            send('NC_SET_MAP','', mapp);
+            //console.log(selected_option_value);
+        });
+    });
     
    // list('#out', data)
 }
@@ -176,21 +197,26 @@ function list(name, data){
       }
     
     if(data.channel != undefined ){
+            var midimapid = "#midimapid" + data.channel + data.note + data._type
+            var midimapval = "#midimapval" + data.channel + data.note + data._type
+            
+            var mapObj1 = {midimapid: midimapid, midimapoutselect: data.cmds, midimapval: midimapval, midimapouttext: data.val };
+            var MIDI_Mapping1 = replaceAll(model.MIDIMapping, mapObj1 );
         
-            var mapObj1 = {MIDIMapID: 'halolol', Scene: 'Scene Die 4' };
-            var MIDI_Mapping = replaceAll(model.MIDIMapping, mapObj1 );
-            alert( 'FIND = ' + MIDI_Mapping);
+           // alert( 'model.MIDIMapping = ' + model.MIDIMapping);
+            //alert( 'data.cmds = ' + data.cmds);
+           // alert( 'FIND MIDI_Mapping1 = ' + MIDI_Mapping1);
         
-            var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + ' // Note: ' + data.note + ' // CMD: ' + data._type + '' + MIDI_Mapping, idinput: 'blnk' + data.channel + data.note + data._type, sources: '' };
+            var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + ' // Note: ' + data.note + ' // CMD: ' + data._type + '' + MIDI_Mapping1, idinput: 'blnk' + data.channel + data.note + data._type, sources: '' };
             var scene = replaceAll(model.html,mapObj );
         
         //alert( 'FIND = ' + findInArray(conlist1, scene)); // 
         
+        
         if(findInArray(conlist1, scene)){
             var id = "#blnk" + data.channel + data.note + data._type
             console.log('HTML id = ' + id);
-               
-             
+
             $(id).addClass("list-group-item-success");
             //$(id).css({"background-color": "blue", "font-size": "100%"});
             setTimeout(function(){ 
@@ -202,9 +228,11 @@ function list(name, data){
            }else{
                 conlist1.push(scene);
                 $(name).html(conlist1);
+               
+               
            }
-        
-        
+         
+        //document.getElementById(midimapid).value = data.cmds;
     }; 
         
     
@@ -250,6 +278,10 @@ function scrolldown() {
 	elem.scrollTop = elem.scrollHeight;
     
     $('html, body').animate({scrollTop: $elem.height()}, 800);
+    
+}
+
+function chmang(){
     
 }
 
