@@ -20,82 +20,10 @@ MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
 });
 
 // Monitor all MIDI inputs with a single "message" listener
-easymidi.getInputs().forEach(function(inputName){
-    device = new easymidi.Input(inputName);
-    mapping(inputName)
-});
 
-function mapping(inputName){
-    device.on('message', function (msg) {
-        var vals = Object.keys(msg).map(function(key){return key+": "+msg[key];});
-        //console.log(inputName+": "+vals.join(', '));
-        mainWindow.webContents.send('MIDI_Mapping', msg );
-        MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
-        
-  });
-    
-    device.on('message', function (msg) {
-        var i = msg.channel + '.' + msg.note + msg._type
-        var a = MIDImapping.get(i)
-        
-        if(boll(a,msg)){
-            console.log('Testing msg Check= ' + a)
-            
-            a.cmds.forEach(function(element) {
-                console.log(element);
-            });
-       
-            obs.send(a.cmds, a.val , (err, data) => {
-                console.log(err, data);   
-            });
-            
-        }       
-    }); 
-}
 
-function MIDI(){
-    var MIDIdevice
-    easymidi.getInputs().forEach(function(inputName){
-        MIDIdevice = new easymidi.Input(inputName);
-    });
-    MIDIdevice.on('message', function (msg) {
-        var i = msg.channel + '.' + msg.note + msg._type
-        var a = MIDImapping.get(i)
-        if(boll(a,msg)){
-            console.log('Testing msg Check= ' + a)
-            
-            a.cmds.forEach(function(element) {
-                console.log(element);
-            });
-        }  
-    });
-}
 
-function boll(a, b){
-    if(a.channel == b.channel && a.note == b.note && a._type == b._type){
-        return true
-    }else{
-        return false
-    }
-}
 
-function testing(msg){
-    
-    var i = msg.channel + '.' + msg.note + msg._type
-    var a = MIDImapping.get(i)
-   
-    console.log('Testing msg = ' + msg.channel)
-    console.log('Testing a = ' + a.channel)
-    
-    if(boll(a,msg)){
-            console.log('Testing msg Check= ' + a)
-            
-            a.cmds.forEach(function(element) {
-                console.log(element);
-            });
-            
-        }
-}
 
 
 //var index = require('./index.js');
@@ -381,5 +309,81 @@ function test(){
     
 }
 
+ipcMain.on('f_mapping_start', (event, data) => {
+    console.log("f_mapping_start");
+    easymidi.getInputs().forEach(function(inputName){
+        device = new easymidi.Input(inputName);
+        mapping(inputName)
+    }); 
+})
+ipcMain.on('f_mapping_stop', (event, data) => {
+    device.close();
+}) 
 
 
+function mapping(inputName){
+        device.on('message', function (msg) {
+            var vals = Object.keys(msg).map(function(key){return key+": "+msg[key];});
+            //console.log(inputName+": "+vals.join(', '));
+            mainWindow.webContents.send('MIDI_Mapping', msg );
+            MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
+
+        });
+}
+
+function MIDI(){
+        easymidi.getInputs().forEach(function(inputName){
+            device = new easymidi.Input(inputName);
+        }); 
+    
+    var MIDIdevice
+    easymidi.getInputs().forEach(function(inputName){
+        //MIDIdevice = new easymidi.Input(inputName);
+    });
+    device.on('message', function (msg) {
+        var i = msg.channel + '.' + msg.note + msg._type
+        var a = MIDImapping.get(i)
+        if(boll(a,msg)){
+            if(a.cmds != undefined){
+                a.cmds.forEach(function(element) {
+                    console.log(element);
+                    obs.send(element,{'scene-name': a.val}, (err, data) => {
+                        console.log(err, data);
+                    });
+                });
+               }
+            //console.log('Testing msg Check= ' + a)
+            
+            
+        }  
+    });
+}
+
+function boll(a, b){
+    if(a.channel == b.channel && a.note == b.note && a._type == b._type){
+        return true
+    }else{
+        return false
+    }
+}
+
+function testing(msg){
+    
+    var i = msg.channel + '.' + msg.note + msg._type
+    var a = MIDImapping.get(i)
+   
+    console.log('Testing msg = ' + msg.channel)
+    console.log('Testing a = ' + a.channel)
+    
+    if(boll(a,msg)){
+            console.log('Testing msg Check= ' + a)
+            
+            a.cmds.forEach(function(element) {
+                console.log(element);
+            });
+            
+        }
+}
+
+
+MIDI()

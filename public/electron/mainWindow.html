@@ -107,17 +107,26 @@
 		</div>
 		<div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
 			<ul class='list-group pmd-z-depth pmd-list pmd-list-avatar pmd-card-list'>
-			<div class="panel-body">
-            <button onclick="saveMIDIMapping()" type="button" class="btn btn-primary"> Sichern </button ><br>
-            <button onclick="loadMIDIMapping()" type="button" class="btn btn-primary"> Laden </button ><br>
-              <div id="out">
-               
-
-            </div>
-                 
+                <div class="panel-body">
+                    
+                    
+                        <button onclick="saveMIDIMapping()" type="button" class="btn btn-primary"> Sichern </button >
+                        <button onclick="loadMIDIMapping()" type="button" class="btn btn-primary"> Laden </button >
+                        <div class="pmd-switch" >
+                            <label >
+                                <input id="activ_mapping" type="checkbox">
+                                <span class="pmd-switch-label pmd-checkbox-ripple-effect"> </span> 
+                                
+                            </label>
+                            <span class="pmd-switch-label" for="replay_buffer">Mapping Modus</span>
+                        </div>
+                   
+                    
+                      
+                    <div id="out">
+                    </div>
                 </div>
-             </ul>
-            
+            </ul>
 		</div>
 	</div>
 </div> <!--Accordion with colored icon end-->

@@ -81,6 +81,15 @@ $( "#replay_buffer" ).click(function() {
     }
 });
 
+$( "#activ_mapping" ).click(function() {
+    var checkbox = $('#activ_mapping').prop('checked')
+    if(checkbox){
+        send('f_mapping_start');
+    }else{ 
+        send('f_mapping_stop');
+    }
+});
+
 $( "#replaystart" ).click(function() {
     var buffertime = $( "#buffertime" ).val();
    var bufsavet = $( "#bufsavet" ).val();
