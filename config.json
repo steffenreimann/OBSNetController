@@ -157,12 +157,12 @@
           "y": 60
         },
         {
-          "cx": 0,
-          "cy": 0,
+          "cx": 1680,
+          "cy": 1050,
           "name": "Bildschirmaufnahme",
           "render": true,
-          "source_cx": 0,
-          "source_cy": 0,
+          "source_cx": 1680,
+          "source_cy": 1050,
           "type": "monitor_capture",
           "volume": 1,
           "x": 0,

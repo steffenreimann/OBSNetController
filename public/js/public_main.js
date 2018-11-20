@@ -132,20 +132,16 @@ function send(name,cmd,d){
 
 function loadMIDIMapping(){
     var conlist1 = [];
+   
+    $('#out').html("Load");
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
-                console.log(MIDIMapping);
-
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
-            console.log(itemm);
             list('#out', itemm)
         });
     });
-    
-    
-    console.log(MIDIMapping);
-   // list('#out', data)
 }
+
 function saveMIDIMapping(){
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     
@@ -227,7 +223,7 @@ function list(name, data){
         if(findInArray(conlist1, scene)){
             var id = "#blnk" + data.channel + data.note + data._type
             console.log('HTML id = ' + id);
-
+            scrolldown(id)
             $(id).addClass("list-group-item-success");
             //$(id).css({"background-color": "blue", "font-size": "100%"});
             setTimeout(function(){ 
@@ -280,21 +276,22 @@ function replaceAll(str,mapObj){
     });
 }
 
-function scrolldown() {
-	var elem = $(window).scrollTop()
-	var elemb = $(window).scrollBottom()
+function scrolldown(q) {
+	//var elem = $(window).scrollTop()
+	//var elemb = $(window).scrollBottom()
     
-    console.log(elem);
-    console.log(elemb);
-	elem.scrollTop = elem.scrollHeight;
+   // console.log(elem);
     
-    $('html, body').animate({scrollTop: $elem.height()}, 800);
+	//elem.scrollTop = elem.scrollHeight;
     
+    //$('html, body').animate({scrollTop: $elem.height()}, 800);
+    var pos = $(q).position();
+    
+    console.log(pos);
+    document.documentElement.scrollTop = document.body.scrollTop = pos.top;
+    //document.documentElement.scrollLeft = document.body.scrollLeft = 500;
 }
 
-function chmang(){
-    
-}
 
 function listdel() {
     data1 = "";
@@ -305,6 +302,7 @@ function listdel() {
 }
 
 
+loadMIDIMapping();
 $( "#buffertime" ).val(conf.replay.buffertime);
 $( "#bufsavet" ).val(conf.replay.bufsavet);
 $( "#networkSectionIpAddress" ).val(conf.obsnet.ip);
