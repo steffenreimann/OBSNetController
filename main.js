@@ -9,6 +9,7 @@ var easymidi = require('easymidi');
 
 let conf = editJsonFile('./config.json');
 let MIDImapping = editJsonFile('./mapping.json');
+let obs_f = editJsonFile('./obs_function.json');
 var device
 
 // Reload it from the disk
@@ -186,6 +187,9 @@ ipcMain.on('MIDIMapping', (event, data) => {
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
+ipcMain.on('OBS_F', (event, data) => {
+           event.returnValue = obs_f.get()
+})
 ipcMain.on('NC_DISCONNECT', (event, data) => {
            console.log('NC_DISCONNECT' + JSON.stringify(data));
           
@@ -323,37 +327,53 @@ ipcMain.on('f_mapping_stop', (event, data) => {
 
 
 function MIDI(){
-        easymidi.getInputs().forEach(function(inputName){
-            device = new easymidi.Input(inputName);
-        }); 
-    
-    var MIDIdevice
+   
     easymidi.getInputs().forEach(function(inputName){
-        //MIDIdevice = new easymidi.Input(inputName);
-    });
-    device.on('message', function (msg) {
-        if(msg._type == 'cc'){
-           
-        }else if(OBSSendON){
-                var i = msg.channel + '.' + msg.note + msg._type
-                var a = MIDImapping.get(i)
-                if(boll(a,msg)){
-                    if(a.cmds != undefined){
-                        a.cmds.forEach(function(element) {
-                            console.log(element);
-                            obs.send(element,{'scene-name': a.val}, (err, data) => {
-                                console.log(err, data);
+        
+        device = new easymidi.Input(inputName);
+        //console.log(device)
+    }); 
+    
+    easymidi.getOutputs().forEach(function(outName){
+        
+        outdevice = new easymidi.Output(outName);
+        console.log(outName)
+        outdevice.send('noteon', {
+          "channel": 0,
+          "note": 82,
+          "velocity": 127,
+          "_type": "noteoff"
+        })
+    }); 
+    
+    
+    
+    if(device != "" && device != undefined){
+       
+       
+        device.on('message', function (msg) {
+            if(msg._type == 'cc'){
+
+            }else if(OBSSendON){
+                    var i = msg.channel + '.' + msg.note + msg._type
+                    var a = MIDImapping.get(i)
+                    if(boll(a,msg)){
+                        if(a.cmds != undefined){
+                            a.cmds.forEach(function(element) {
+                                console.log(element);
+                                obs.send(element,{'scene-name': a.val}, (err, data) => {
+                                    console.log(err, data);
+                                });
                             });
-                        });
-                       }
-                }
-        }
-        if(MIDIMapON){
-            mainWindow.webContents.send('MIDI_Mapping', msg );
-            MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
-        }
-          
-    });
+                           }
+                    }
+            }
+            if(MIDIMapON){
+                mainWindow.webContents.send('MIDI_Mapping', msg );
+                MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
+            }
+        });  
+    }
 }
 
 function boll(a, b){

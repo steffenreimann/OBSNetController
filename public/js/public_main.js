@@ -3,6 +3,7 @@
     
 
 var conf = ipcRenderer.sendSync('NC_GET_CONF')
+var OBS_F = ipcRenderer.sendSync('OBS_F')
 var MIDIMapping
  var midilist = [];
 var conlist0 = [];
@@ -10,7 +11,15 @@ var conlist1 = [];
 var mapObj1
 var ix = 0;
 var data1 = "";
+var model = require('./../electron/template.json');
+ var mapObj_option_html = []
+            OBS_F.availableMethods.forEach(function(element) {
+                var mapObj_option = { midimapoutselect: element }
+                 mapObj_option_html.push(replaceAll(model.option, mapObj_option ));
+            })
 console.log(conf);
+
+
     ipcRenderer.on('selectedFiles', function(e, data){
         console.log(data);
         $( "#out" ).val(data.path);
@@ -56,14 +65,16 @@ ipcRenderer.on('MIDI_Mapping', function(event, data){
 });
 
 
+
+
 $( "#obssave" ).click(function() {
       var ip = $( "#networkSectionIpAddress" ).val();
   console.log('hallo');
 
     
-    send('OBC','obsnet', {'ip': ip, 'pass': '123123' });
-    send('OBC_CONNECT');
-    //ipcRenderer.send('OBC_CONNECT' , () => {})
+    send('OBS','obsnet', {'ip': ip, 'pass': '123123' });
+    send('OBS_CONNECT');
+    //ipcRenderer.send('OBS_CONNECT' , () => {})
   });    
 
 $( "#replay_buffer" ).click(function() {
@@ -71,13 +82,13 @@ $( "#replay_buffer" ).click(function() {
     var checkbox = $('input[type=checkbox]').prop('checked')
     var buffertime = $( "#buffertime" ).val();
     var bufsavet = $( "#bufsavet" ).val();   
-    send('OBC','replay', {'check': checkbox, 'buffertime': buffertime, 'bufsavet': bufsavet });
+    send('OBS','replay', {'check': checkbox, 'buffertime': buffertime, 'bufsavet': bufsavet });
     if(checkbox){
        console.log('True'); 
-        send('OBC_CMD','StartReplayBuffer', {});
+        send('OBS_CMD','StartReplayBuffer', {});
     }else{
        console.log('False'); 
-        send('OBC_CMD','StopReplayBuffer', {});
+        send('OBS_CMD','StopReplayBuffer', {});
     }
 });
 
@@ -93,9 +104,9 @@ $( "#activ_mapping" ).click(function() {
 $( "#replaystart" ).click(function() {
     var buffertime = $( "#buffertime" ).val();
    var bufsavet = $( "#bufsavet" ).val();
-    send('OBC','replay', {'buffertime': buffertime, 'bufsavet': bufsavet });
+    send('OBS','replay', {'buffertime': buffertime, 'bufsavet': bufsavet });
       
-   send('OBC_REPLAY');
+   send('OBS_REPLAY');
     
   });
 $( "#sendjsontest" ).click(function() {send('sendjsontest','replay');});
@@ -104,10 +115,10 @@ $( "#saveMIDIMapping" ).click(function() {
     var checkbox = $('input[type=checkbox]').prop('checked')
     if(checkbox){
        console.log('True'); 
-        send('OBC_CONNECT');
+        send('OBS_CONNECT');
     }else{
        console.log('False'); 
-        send('OBC_DC');
+        send('OBS_DC');
     }
     
   });
@@ -116,10 +127,10 @@ $( "#conn_switch" ).click(function() {
     var checkbox = $('input[type=checkbox]').prop('checked')
     if(checkbox){
        console.log('True'); 
-        send('OBC_CONNECT');
+        send('OBS_CONNECT');
     }else{
        console.log('False'); 
-        send('OBC_DC');
+        send('OBS_DC');
     }
     
   });
@@ -206,8 +217,11 @@ function list(name, data){
     if(data.channel != undefined ){
             var midimapid = "#midimapid" + data.channel + data.note + data._type
             var midimapval = "#midimapval" + data.channel + data.note + data._type
-            
-            var mapObj1 = {midimapid: midimapid, midimapoutselect: data.cmds, midimapval: midimapval, midimapouttext: data.val };
+           
+        
+            //var mapObj_option = replaceAll(model.MIDIMapping, mapObj1 );
+        
+            var mapObj1 = {midimapid: midimapid, option: mapObj_option_html, midimapval: midimapval, midimapouttext: data.val };
             var MIDI_Mapping1 = replaceAll(model.MIDIMapping, mapObj1 );
         
            // alert( 'model.MIDIMapping = ' + model.MIDIMapping);
@@ -288,7 +302,9 @@ function scrolldown(q) {
     var pos = $(q).position();
     
     console.log(pos);
-    document.documentElement.scrollTop = document.body.scrollTop = pos.top;
+    document.documentElement.scrollTop = document.body.scrollTop = pos.top ;
+    
+   // document.documentElement.animate({scrollTop: pos.top}, 800);
     //document.documentElement.scrollLeft = document.body.scrollLeft = 500;
 }
 
