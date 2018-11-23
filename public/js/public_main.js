@@ -215,6 +215,7 @@ function list(name, data){
         var scene = replaceAll(model.html,mapObj );
         conlist0.push(scene);
         $(name).html(conlist0);
+         hljs.initHighlightingOnLoad();
       }
     
     if(data.channel != undefined ){
@@ -242,6 +243,9 @@ function list(name, data){
             console.log('HTML id = ' + id);
             
             if(data._type == 'noteoff'){
+                    scrolldown(id)
+               }
+            if(data._type == 'cc'){
                     scrolldown(id)
                }
             
@@ -312,7 +316,7 @@ function test(){
     console.log("Hallo ich bin der test");
 }
   
- 
+
 
 //loadMIDIMapping();
 $( "#buffertime" ).val(conf.replay.buffertime);

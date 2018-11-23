@@ -49,7 +49,11 @@ let addWindow;
 // Listen for app to be ready
 app.on('ready', function(){
   // Create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+    width: 1000,
+    height:500,
+    title:'OBS Net Control'
+  });
     
     mainWindow.loadURL(url.format({
             pathname: path.join(__dirname, 'public/electron/mainWindow.html'),
@@ -74,8 +78,8 @@ app.on('ready', function(){
 // Handle add item window
 function createAddWindow(){
   addWindow = new BrowserWindow({
-    width: 300,
-    height:200,
+    width: 1000,
+    height:500,
     title:'OBS Net Control'
   });
     
@@ -93,18 +97,23 @@ function createAddWindow(){
  // Create menu template
 const mainMenuTemplate =  [
   // Each object is a dropdown
-  {
-    label: 'File',
-    submenu:[         
-      {
-        label: 'Quit',
-        accelerator:process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-        click(){
-          app.quit();
-        }
-      }
-    ]
-  }
+    {
+    label: "Application",
+    submenu: [
+        { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
+        { type: "separator" },
+        { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+    ]}, {
+    label: "Edit",
+    submenu: [
+        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+        { type: "separator" },
+        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+    ]}
 ];
 // If OSX, add empty object to menu
 if(process.platform == 'darwin'){
@@ -280,7 +289,7 @@ function swScene(data){
 }
 
 function test(){
-    //console.log('test');
+    console.log('testjojojojo');
     obs.send('GetCurrentScene',{}, (err, data) => {
         //console.log(err, data);
     }); 
@@ -401,6 +410,9 @@ function boll(a, b){
         return false
     }
 }
+
+var ffpk = MIDImapping.get("0")
+console.log(ffpk);
 
 function testing(msg){
     
