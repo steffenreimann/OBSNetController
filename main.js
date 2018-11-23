@@ -35,9 +35,9 @@ try {
 var os = require('os');
 var ifaces = os.networkInterfaces();
 } catch (ex) {
-    console.log(ex);
+    //console.log(ex);
     if(ex.code == 'MODULE_NOT_FOUND'){
-	    console.log('MODULE_NOT_FOUND')
+	    //console.log('MODULE_NOT_FOUND')
     }
 }
 // SET ENV
@@ -58,7 +58,7 @@ app.on('ready', function(){
         title:'OBS Net Control'
 	  }));
     
-//console.log(config_file.get("firststart"));
+////console.log(config_file.get("firststart"));
 
 // Quit app when closed
   mainWindow.on('closed', function(){
@@ -148,41 +148,44 @@ function setJSON(data) {
 }
 
 ipcMain.on('DOM', (event, data) => {
-           console.log("DOM Data : " + data);
+           //console.log("DOM Data : " + data);
 })
 
-ipcMain.on('OBC', (event, data) => {
-           console.log("DOM Data : " + data);
+ipcMain.on('OBS', (event, data) => {
+           //console.log("DOM Data : " + data);
             conf.set(data.cmd, data.d);
             
 })
-ipcMain.on('OBC_CONNECT', (event, data) => {
-           console.log("DOM Data : " + data);
+ipcMain.on('OBS_CONNECT', (event, data) => {
+           //console.log("Connect Data : " + data);
             obsconnect()
     
 })
 
-ipcMain.on('OBC_CMD', (event, data) => {
-    console.log("OBC_CMD : " + JSON.stringify(data));
+ipcMain.on('OBS_CMD', (event, data) => {
+    //console.log("OBS_CMD : " + JSON.stringify(data));
     obs.send(data.cmd,data.d, (err, data) => {
-        console.log(err, data);
+        //console.log(err, data);
     });
 })
 
-ipcMain.on('OBC_REPLAY', (event, data) => {
-           console.log("OBC_REPLAY : " + JSON.stringify(data));
+ipcMain.on('OBS_REPLAY', (event, data) => {
+           //console.log("OBS_REPLAY : " + JSON.stringify(data));
            var c = conf.get()
            replay(c.replay)
 })
 
 ipcMain.on('NC_GET_CONF', (event, data) => {
-           console.log("OBC_Start : " + JSON.stringify(data));
+           //console.log("OBS_Start : " + JSON.stringify(data));
            event.returnValue = conf.get()
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
 ipcMain.on('MIDIMapping', (event, data) => {
-           //console.log("OBC_Start : " + JSON.stringify(data));
+           ////console.log("OBS_Start : " + JSON.stringify(data));
+            MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
+                autosave: true
+            });
            event.returnValue = MIDImapping.get()
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
@@ -191,89 +194,63 @@ ipcMain.on('OBS_F', (event, data) => {
            event.returnValue = obs_f.get()
 })
 ipcMain.on('NC_DISCONNECT', (event, data) => {
-           console.log('NC_DISCONNECT' + JSON.stringify(data));
+           //console.log('NC_DISCONNECT' + JSON.stringify(data));
           
         
 })
 ipcMain.on('NC_SCENESWITCH', (event, data) => {
-           console.log('NC_SCENESWITCH = ' + data.cmd.trim());
+           //console.log('NC_SCENESWITCH = ' + data.cmd.trim());
            
             swScene(data.cmd.trim());
 })
 ipcMain.on('NC_SOURCESW', (event, data) => {
-           console.log('NC_SOURCESW = ' + data.cmd.trim());
+           //console.log('NC_SOURCESW = ' + data.cmd.trim());
            
             swScene(data.cmd.trim());
 })
 
 
 ipcMain.on('NC_SET_CONF', (event, data) => {
-    console.log('NC_CONF = ' + data);
+    //console.log('NC_CONF = ' + data);
     conf.set(data);
     mainWindow.webContents.send('NC_SET_CONF', data );
 })
 ipcMain.on('NC_SET_MAP', (event, data) => {
-    console.log('NC_MAP = ' + data.channel);
+    //console.log('NC_MAP = ' + data.d.cmds[0]);
     //MIDImapping.set(data);
-    MIDImapping.set(data.d.channel + '.' + data.d.note + data.d._type, data.d)
+     
+    MIDImapping.set(typeselector(data.d), data.d)
     //mainWindow.webContents.send('NC_SET_CONF', data );
 })
 
-ipcMain.on('sendjsontest', (event, data) => {
-    console.log('sendjsontest = ' + data);
-    
-    var s = {"channel": 6,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon"}
-    testing(s);
-})
-
-
-
-// 
-
-
-//setJSON({name: "username", val: "Steffen"})
-
- // Output the whole thing
-//console.log(config_file.toObject());
-// { planet: 'Earth',
-//   name: { first: 'Johnny', last: 'B.' },
-//   is_student: false,
-//   a: { new: { field: [Object] } } }
-
-
 function obsconnect(){
     var c = conf.get()
-    console.log('Config = ip == ' + JSON.stringify(c));
-    //console.log('Config = pass == ' + c.obsnet.pass);
+    //console.log('Config = ip == ' + JSON.stringify(c));
+    ////console.log('Config = pass == ' + c.obsnet.pass);
     OBSSendON = true;
 
     obs.connect({ address: c.obsnet.ip, password: c.obsnet.pass })
         .then(() => {
-            console.log('Verbunden mit dem OBS Server ' + c.obsnet.ip );
+            //console.log('Verbunden mit dem OBS Server ' + c.obsnet.ip );
         obs.GetSceneList({}, (err, Scene) => {
-        console.log("Scene:", err, Scene);
+        //console.log("Scene:", err, Scene);
         conf.set('scenes', Scene.scenes);
         mainWindow.webContents.send('LIST', {"name": "scenes", "data": Scene.scenes} );
         
     });
       })
         .catch(err => { // Promise convention dicates you have a catch on every chain.
-            console.log(err);
+            //console.log(err);
       });
     
 }
 
-//console.log('Config = Test == ' + tesst.obsnet.ip);
-
+////console.log('Config = Test == ' + tesst.obsnet.ip);
 
 obs.onSwitchScenes(data => {
-  console.log(`New Active Scene: ${data.sceneName}`);
+  //console.log(`New Active Scene: ${data.sceneName}`);
     
 });
-
 // You must add this handler to avoid uncaught exceptions.
 obs.on('error', err => {
 	console.error('socket error:', err);
@@ -286,7 +263,7 @@ function replay(data){
     mstime + data.bufsafet;
     //Setzt Scene nach 'data' Sekunden auf die voherrige zurück
     obs.getCurrentScene({}, (err, CurrentScene) => {
-        console.log("Current Scene:", err, CurrentScene.name);
+        //console.log("Current Scene:", err, CurrentScene.name);
         setTimeout(function(){ 
                 swScene(CurrentScene.name)
             }, mstime);
@@ -298,23 +275,18 @@ function replay(data){
 }
 
 function swScene(data){
-    console.log(data);
+    //console.log(data);
     obs.setCurrentScene({'scene-name': data});
 }
 
 function test(){
-    console.log('test');
+    //console.log('test');
     obs.send('GetCurrentScene',{}, (err, data) => {
-        console.log(err, data);
-    });
-    
-    
-    
-    
+        //console.log(err, data);
+    }); 
 }
 
 ipcMain.on('f_mapping_start', (event, data) => {
-    
     MIDIMapON = true;
 })
 ipcMain.on('f_mapping_stop', (event, data) => {
@@ -323,56 +295,102 @@ ipcMain.on('f_mapping_stop', (event, data) => {
     OBSSendON = false;
 }) 
 
-
-
-
 function MIDI(){
    
     easymidi.getInputs().forEach(function(inputName){
         
         device = new easymidi.Input(inputName);
-        //console.log(device)
+        ////console.log(device)
     }); 
     
     easymidi.getOutputs().forEach(function(outName){
         
         outdevice = new easymidi.Output(outName);
-        console.log(outName)
+        //console.log(outName)
         outdevice.send('noteon', {
-          "channel": 0,
-          "note": 82,
-          "velocity": 127,
-          "_type": "noteoff"
+          "channel": 6,
+          "note": 53,
+          "velocity": 01
+        })
+         
+        outdevice.send('noteon', {
+            "channel": 7,
+          "note": 53,
+          "velocity": 05
         })
     }); 
     
-    
-    
     if(device != "" && device != undefined){
-       
+        
        
         device.on('message', function (msg) {
-            if(msg._type == 'cc'){
-
-            }else if(OBSSendON){
-                    var i = msg.channel + '.' + msg.note + msg._type
-                    var a = MIDImapping.get(i)
-                    if(boll(a,msg)){
-                        if(a.cmds != undefined){
-                            a.cmds.forEach(function(element) {
-                                console.log(element);
-                                obs.send(element,{'scene-name': a.val}, (err, data) => {
-                                    console.log(err, data);
-                                });
+            
+            if(msg._type == 'cc'&& !MIDIMapON){
+                ////console.log(msg);
+                var i = typeselector(msg)
+                var a = MIDImapping.get(i)
+                if(boll(a,msg)){
+                    if(a.cmds != undefined){
+                        a.cmds.forEach(function(element) {
+                            ////console.log(element);
+                            ////console.log(msg.value);
+                            var x = Number(msg.value);
+                            x = x / 127;
+                            x = x.toFixed(4)
+                            ////console.log(x);
+                            element.ar.volume = x;
+                            element.ar.volume = Number(element.ar.volume);
+                            ////console.log(element);
+                            
+                            
+                            obs.send(element.rn, element.ar, (err, data) => {
+                                console.log("err " , err, data);
                             });
-                           }
+                        });
                     }
+                }
+                    
+            }else if(OBSSendON && !MIDIMapON){
+                var i = typeselector(msg)
+                var a = MIDImapping.get(i)
+                //console.log(JSON.stringify(a.cmds));
+                //console.log(a);
+                if(boll(a,msg)){
+                    if(a.cmds != undefined){
+                        a.cmds.forEach(function(element) {
+                            ////console.log(element);
+                            
+                            
+                            
+                            obs.send(element.rn, element.ar, (err, data) => {
+                                console.log(err, data);
+                            });
+                        });
+                    }
+                }
             }
             if(MIDIMapON){
-                mainWindow.webContents.send('MIDI_Mapping', msg );
-                MIDImapping.set(msg.channel + '.' + msg.note + msg._type, msg);
+                var i = typeselector(msg)
+                var a = MIDImapping.get(i)
+                if(a != undefined){
+                    if(boll(a,msg)){
+                        mainWindow.webContents.send('MIDI_Mapping', a );
+                        //console.log(a);
+                    }
+                }else{
+                    mainWindow.webContents.send('MIDI_Mapping', msg );
+                    MIDImapping.set(i, msg);
+                }
             }
         });  
+    }
+}
+
+function typeselector(msg){
+    if(msg._type == 'cc'){
+        return msg.channel + '.' + msg.controller + msg._type
+    }else{
+        return msg.channel + '.' + msg.note + msg._type
     }
 }
 
@@ -389,14 +407,14 @@ function testing(msg){
     var i = msg.channel + '.' + msg.note + msg._type
     var a = MIDImapping.get(i)
    
-    console.log('Testing msg = ' + msg.channel)
-    console.log('Testing a = ' + a.channel)
+    //console.log('Testing msg = ' + msg.channel)
+    //console.log('Testing a = ' + a.channel)
     
     if(boll(a,msg)){
-            console.log('Testing msg Check= ' + a)
+            //console.log('Testing msg Check= ' + a)
             
             a.cmds.forEach(function(element) {
-                console.log(element);
+                //console.log(element);
             });
             
         }

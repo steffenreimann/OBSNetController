@@ -12,11 +12,9 @@ var mapObj1
 var ix = 0;
 var data1 = "";
 var model = require('./../electron/template.json');
- var mapObj_option_html = []
-            OBS_F.availableMethods.forEach(function(element) {
-                var mapObj_option = { midimapoutselect: element }
-                 mapObj_option_html.push(replaceAll(model.option, mapObj_option ));
-            })
+var mapObj_option_html = []
+
+
 console.log(conf);
 
 
@@ -69,7 +67,7 @@ ipcRenderer.on('MIDI_Mapping', function(event, data){
 
 $( "#obssave" ).click(function() {
       var ip = $( "#networkSectionIpAddress" ).val();
-  console.log('hallo');
+    console.log('Connect OBS IP ', ip);
 
     
     send('OBS','obsnet', {'ip': ip, 'pass': '123123' });
@@ -142,9 +140,9 @@ function send(name,cmd,d){
 }
 
 function loadMIDIMapping(){
-    var conlist1 = [];
+   // var conlist1 = [];
    
-    $('#out').html("Load");
+    //$('#out').html(conlist1);
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
@@ -154,21 +152,22 @@ function loadMIDIMapping(){
 }
 
 function saveMIDIMapping(){
-    MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     
-    //console.log(MIDIMapping);
+    MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
-            
             var midimapid = "#midimapid" + itemm.channel + itemm.note + itemm._type
-            var midimapval = "#midimapval" + itemm.channel + itemm.note + itemm._type
+           
+            console.log(midimapid);
             
+            var htmlString = $(midimapid).html()
+            console.log(htmlString);
             var ch_cmd = document.getElementById(midimapid);
-            var ch_val = document.getElementById(midimapval);
-            var ch_cmdval = []
-            ch_cmdval.push(ch_cmd.value)
-            var mapp = {channel: itemm.channel, note: itemm.note, velocity: itemm.velocity, _type: itemm._type, cmds: ch_cmdval, val: ch_val.value }
+            
+            ch_cmd = JSON.parse(ch_cmd.value);
+            console.log(ch_cmd);
+            var mapp = {channel: itemm.channel, note: itemm.note, controller: itemm.controller, velocity: itemm.velocity, _type: itemm._type, cmds: ch_cmd }
             //mapp = mapp.cmds.push(ch_cmd.value);
             
             console.log(ch_cmd.value);
@@ -182,6 +181,14 @@ function saveMIDIMapping(){
    // list('#out', data)
 }
 
+function typeselector(msg){
+    if(msg._type == 'cc'){
+        return msg.channel + '.' + msg.controller + msg._type
+    }else{
+        return msg.channel + '.' + msg.note + msg._type
+    }
+}
+
 function list(name, data){
     
    var model = require('./../electron/template.json');
@@ -191,24 +198,20 @@ function list(name, data){
     if(data.sources != undefined ){
        var visbol
        data.sources.forEach(function(element) {
-           //model.sources.length
-          console.log(element);
-           
-           
-           if(element.render){
+            //model.sources.length
+            console.log(element);
+            if(element.render){
                 visbol = 'visibility'
-              }else{
+            }else{
                 visbol = 'visibility_off'
-              }
-           var sourcesmapObj = {sourcename:element.name,sourcevol:element.volume, sourcerender: element.render, vissourcename: "vis" + element.name, visbol: visbol};
+            }
+            var sourcesmapObj = {sourcename:element.name,sourcevol:element.volume, sourcerender: element.render, vissourcename: "vis" + element.name,   visbol: visbol};
            
-             var source = replaceAll(model.source,sourcesmapObj );
-           sourcelist.push(source);
-           
-           
+            var source = replaceAll(model.source,sourcesmapObj );
+            sourcelist.push(source);
         }); 
         console.log('HTML Model Test === ' + model);
-        var mapObj = {ix:ix,data:data.name, idinput: "but" + data.name, sources: sourcelist};
+        var mapObj = {ix:ix,data:data.name, option: data.name, idinput: "but" + data.name, sources: sourcelist};
         var scene = replaceAll(model.html,mapObj );
         conlist0.push(scene);
         $(name).html(conlist0);
@@ -220,8 +223,8 @@ function list(name, data){
            
         
             //var mapObj_option = replaceAll(model.MIDIMapping, mapObj1 );
-        
-            var mapObj1 = {midimapid: midimapid, option: mapObj_option_html, midimapval: midimapval, midimapouttext: data.val };
+
+            var mapObj1 = {midimapid: midimapid, midimapouttext: JSON.stringify(data.cmds, undefined, 4) };
             var MIDI_Mapping1 = replaceAll(model.MIDIMapping, mapObj1 );
         
            // alert( 'model.MIDIMapping = ' + model.MIDIMapping);
@@ -231,13 +234,17 @@ function list(name, data){
             var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + ' // Note: ' + data.note + ' // CMD: ' + data._type + '' + MIDI_Mapping1, idinput: 'blnk' + data.channel + data.note + data._type, sources: '' };
             var scene = replaceAll(model.html,mapObj );
         
-        //alert( 'FIND = ' + findInArray(conlist1, scene)); // 
+        console.log(data); 
         
         
         if(findInArray(conlist1, scene)){
             var id = "#blnk" + data.channel + data.note + data._type
             console.log('HTML id = ' + id);
-            scrolldown(id)
+            
+            if(data._type == 'noteoff'){
+                    scrolldown(id)
+               }
+            
             $(id).addClass("list-group-item-success");
             //$(id).css({"background-color": "blue", "font-size": "100%"});
             setTimeout(function(){ 
@@ -291,34 +298,23 @@ function replaceAll(str,mapObj){
 }
 
 function scrolldown(q) {
-	//var elem = $(window).scrollTop()
-	//var elemb = $(window).scrollBottom()
-    
-   // console.log(elem);
-    
-	//elem.scrollTop = elem.scrollHeight;
-    
-    //$('html, body').animate({scrollTop: $elem.height()}, 800);
-    var pos = $(q).position();
-    
-    console.log(pos);
-    document.documentElement.scrollTop = document.body.scrollTop = pos.top ;
-    
-   // document.documentElement.animate({scrollTop: pos.top}, 800);
-    //document.documentElement.scrollLeft = document.body.scrollLeft = 500;
+    var pos = $(q).position();    
+    document.documentElement.scrollTop = document.body.scrollTop = pos.top;
 }
 
 
 function listdel() {
-    data1 = "";
-    conlist = [];
-    ix = 0;
-    console.log(data1 + ix);
-    $('#ergebnis').html(data1);
+    conlist1 = [];
+    
+    $('#out').html(conlist1);
 }
+function test(){
+    console.log("Hallo ich bin der test");
+}
+  
+ 
 
-
-loadMIDIMapping();
+//loadMIDIMapping();
 $( "#buffertime" ).val(conf.replay.buffertime);
 $( "#bufsavet" ).val(conf.replay.bufsavet);
 $( "#networkSectionIpAddress" ).val(conf.obsnet.ip);

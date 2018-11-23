@@ -42,7 +42,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 1,
+          "volume": 0.6814720034599304,
           "x": 0,
           "y": 32
         },
@@ -95,7 +95,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 1,
+          "volume": 0,
           "x": 0,
           "y": 40
         },
@@ -152,17 +152,17 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 1,
+          "volume": 0.6814720034599304,
           "x": 0,
           "y": 60
         },
         {
-          "cx": 1680,
-          "cy": 1050,
+          "cx": 0,
+          "cy": 0,
           "name": "Bildschirmaufnahme",
           "render": true,
-          "source_cx": 1680,
-          "source_cy": 1050,
+          "source_cx": 0,
+          "source_cy": 0,
           "type": "monitor_capture",
           "volume": 1,
           "x": 0,
@@ -205,12 +205,24 @@
         {
           "cx": 0,
           "cy": 0,
+          "name": "audiotest",
+          "render": true,
+          "source_cx": 0,
+          "source_cy": 0,
+          "type": "wasapi_output_capture",
+          "volume": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "cx": 0,
+          "cy": 0,
           "name": "Lets Play LOL",
           "render": true,
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 1,
+          "volume": 0,
           "x": 0,
           "y": 0
         }

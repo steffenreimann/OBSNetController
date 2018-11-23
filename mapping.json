@@ -1,978 +1,90 @@
 {
   "0": {
-    "82noteon": {
+    "47cc": {
       "channel": 0,
-      "note": 82,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetCurrentProfile"
-      ],
-      "val": "undefined"
-    },
-    "82noteoff": {
-      "channel": 0,
-      "note": 82,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "53noteon": {
-      "channel": 0,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "Test"
-    },
-    "53noteoff": {
-      "channel": 0,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 0,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 0,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 0,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 0,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 0,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 0,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 0,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 0,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 0,
-      "controller": 23,
-      "value": 0,
+      "controller": 47,
+      "value": 2,
       "_type": "cc",
       "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteon": {
-      "channel": 0,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteoff": {
-      "channel": 0,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "83noteon": {
-      "channel": 0,
-      "note": 83,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "83noteoff": {
-      "channel": 0,
-      "note": 83,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "50noteon": {
-      "channel": 0,
-      "note": 50,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "49noteon": {
-      "channel": 0,
-      "note": 49,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "49noteoff": {
-      "channel": 0,
-      "note": 49,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "50noteoff": {
-      "channel": 0,
-      "note": 50,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    }
-  },
-  "1": {
-    "53noteon": {
-      "channel": 1,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "StreamStart"
-    },
-    "53noteoff": {
-      "channel": 1,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 1,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 1,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 1,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 1,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 1,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 1,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 1,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 1,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteon": {
-      "channel": 1,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteoff": {
-      "channel": 1,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 1,
-      "controller": 7,
-      "value": 21,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    }
-  },
-  "2": {
-    "53noteon": {
-      "channel": 2,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "53noteoff": {
-      "channel": 2,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 2,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 2,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 2,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 2,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 2,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 2,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 2,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 2,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 2,
-      "controller": 7,
-      "value": 0,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    }
-  },
-  "3": {
-    "53noteon": {
-      "channel": 3,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "53noteoff": {
-      "channel": 3,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 3,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 3,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 3,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 3,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 3,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 3,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 3,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 3,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 3,
-      "controller": 7,
-      "value": 0,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    }
-  },
-  "4": {
-    "53noteon": {
-      "channel": 4,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "53noteoff": {
-      "channel": 4,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 4,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 4,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 4,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 4,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 4,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 4,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 4,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 4,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteon": {
-      "channel": 4,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteoff": {
-      "channel": 4,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 4,
-      "controller": 7,
-      "value": 12,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    }
-  },
-  "5": {
-    "53noteon": {
-      "channel": 5,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "Test"
-    },
-    "53noteoff": {
-      "channel": 5,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 5,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 5,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 5,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 5,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 5,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 5,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 5,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 5,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteon": {
-      "channel": 5,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteoff": {
-      "channel": 5,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 5,
-      "controller": 7,
-      "value": 0,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    }
-  },
-  "6": {
-    "53noteon": {
-      "channel": 6,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "53noteoff": {
-      "channel": 6,
-      "note": 53,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteon": {
-      "channel": 6,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "54noteoff": {
-      "channel": 6,
-      "note": 54,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 6,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 6,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 6,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 6,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 6,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 6,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteon": {
-      "channel": 6,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteoff": {
-      "channel": 6,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 6,
-      "controller": 7,
-      "value": 0,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        },
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "Lets Play LOL",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
     }
   },
   "7": {
+    "7cc": {
+      "channel": 7,
+      "controller": 7,
+      "value": 63,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        },
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "Lets Play LOL",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    },
     "53noteon": {
       "channel": 7,
       "note": 53,
       "velocity": 127,
       "_type": "noteon",
       "cmds": [
-        "GetVersion"
-      ],
-      "val": ""
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        },
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "Lets Play LOL",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
     },
     "53noteoff": {
       "channel": 7,
@@ -980,119 +92,39 @@
       "velocity": 127,
       "_type": "noteoff",
       "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        },
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "Lets Play LOL",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
     },
-    "54noteon": {
+    "50noteon": {
       "channel": 7,
-      "note": 54,
+      "note": 50,
       "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
+      "_type": "noteon"
     },
-    "54noteoff": {
+    "50noteoff": {
       "channel": 7,
-      "note": 54,
+      "note": 50,
       "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteon": {
-      "channel": 7,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "55noteoff": {
-      "channel": 7,
-      "note": 55,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteon": {
-      "channel": 7,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "56noteoff": {
-      "channel": 7,
-      "note": 56,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteon": {
-      "channel": 7,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "57noteoff": {
-      "channel": 7,
-      "note": 57,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteon": {
-      "channel": 7,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "52noteoff": {
-      "channel": 7,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
-    },
-    "undefinedcc": {
-      "channel": 7,
-      "controller": 7,
-      "value": 0,
-      "_type": "cc",
-      "cmds": [
-        "GetVersion"
-      ],
-      "val": "undefined"
+      "_type": "noteoff"
     }
   }
 }
