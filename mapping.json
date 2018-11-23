@@ -27,6 +27,26 @@
           "rn": "SetVolume"
         }
       ]
+    },
+    "81noteon": {
+      "channel": 0,
+      "note": 81,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "81noteoff": {
+      "channel": 0,
+      "note": 81,
+      "velocity": 127,
+      "_type": "noteoff"
+    }
+  },
+  "6": {
+    "7cc": {
+      "channel": 6,
+      "controller": 7,
+      "value": 66,
+      "_type": "cc"
     }
   },
   "7": {
@@ -123,6 +143,18 @@
     "50noteoff": {
       "channel": 7,
       "note": 50,
+      "velocity": 127,
+      "_type": "noteoff"
+    },
+    "52noteon": {
+      "channel": 7,
+      "note": 52,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "52noteoff": {
+      "channel": 7,
+      "note": 52,
       "velocity": 127,
       "_type": "noteoff"
     }
