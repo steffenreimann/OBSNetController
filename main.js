@@ -24,7 +24,7 @@ MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
 
 var MIDIMapON = false;
 var OBSSendON = false;
-
+var MIDIMapHelper = false;
 
 
 //var index = require('./index.js');
@@ -108,6 +108,8 @@ const mainMenuTemplate =  [
     submenu: [
         { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
         { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+        { type: "separator" },
+        { label: "Save Mapping", accelerator: "CmdOrCtrl+S", click: function() { test(); }},
         { type: "separator" },
         { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
         { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
@@ -195,7 +197,15 @@ ipcMain.on('MIDIMapping', (event, data) => {
             MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
                 autosave: true
             });
-           event.returnValue = MIDImapping.get()
+            if(data != undefined){
+               var i = typeselector(data)
+                var a = MIDImapping.get(i)
+                 event.returnValue = a
+               }else{
+                   event.returnValue = MIDImapping.get()
+               }
+    
+           
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
@@ -289,15 +299,17 @@ function swScene(data){
 }
 
 function test(){
-    console.log('testjojojojo');
-    obs.send('GetCurrentScene',{}, (err, data) => {
-        //console.log(err, data);
-    }); 
+    //console.log('testjojojojo');
+    mainWindow.webContents.send('NC_SET_CONF');
 }
 
 ipcMain.on('f_mapping_start', (event, data) => {
     MIDIMapON = true;
 })
+ipcMain.on('MIDIMH', (event, data) => {
+    MIDIMapHelper = data;
+})
+
 ipcMain.on('f_mapping_stop', (event, data) => {
    // device.close();
     MIDIMapON = false;
@@ -334,7 +346,7 @@ function MIDI(){
        
         device.on('message', function (msg) {
             
-            if(msg._type == 'cc'&& !MIDIMapON){
+            if(msg._type == 'cc' && !MIDIMapON){
                 ////console.log(msg);
                 var i = typeselector(msg)
                 var a = MIDImapping.get(i)
@@ -350,10 +362,8 @@ function MIDI(){
                             element.ar.volume = x;
                             element.ar.volume = Number(element.ar.volume);
                             ////console.log(element);
-                            
-                            
                             obs.send(element.rn, element.ar, (err, data) => {
-                                console.log("err " , err, data);
+                                //console.log("err " , err, data);
                             });
                         });
                     }
@@ -368,11 +378,8 @@ function MIDI(){
                     if(a.cmds != undefined){
                         a.cmds.forEach(function(element) {
                             ////console.log(element);
-                            
-                            
-                            
                             obs.send(element.rn, element.ar, (err, data) => {
-                                console.log(err, data);
+                                //console.log(err, data);
                             });
                         });
                     }
@@ -404,15 +411,21 @@ function typeselector(msg){
 }
 
 function boll(a, b){
-    if(a.channel == b.channel && a.note == b.note && a._type == b._type){
-        return true
+    //console.log(a);
+    if(a != undefined && b != undefined){
+        if(a.channel == b.channel && a.note == b.note && a._type == b._type){
+            return true
+        }else{
+            return false
+        }
+        
     }else{
         return false
     }
 }
 
 var ffpk = MIDImapping.get("0")
-console.log(ffpk);
+//console.log(ffpk);
 
 function testing(msg){
     

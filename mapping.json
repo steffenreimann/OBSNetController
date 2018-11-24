@@ -1,83 +1,184 @@
 {
   "0": {
+    "14cc": {
+      "channel": 0,
+      "controller": 14,
+      "value": 82,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "19",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    },
+    "7cc": {
+      "channel": 0,
+      "controller": 7,
+      "value": 20,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "19",
+            "request-type": "SetVolume",
+            "source": "Lets Play LOL",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    },
     "47cc": {
       "channel": 0,
       "controller": 47,
-      "value": 2,
+      "value": 127,
+      "_type": "cc",
+      "cmds": []
+    }
+  },
+  "1": {
+    "7cc": {
+      "channel": 1,
+      "controller": 7,
+      "value": 57,
       "_type": "cc",
       "cmds": [
         {
           "_type": "fader",
           "ar": {
-            "message-id": "739",
+            "message-id": "19",
             "request-type": "SetVolume",
-            "source": "audiotest",
-            "volume": 0
-          },
-          "rn": "SetVolume"
-        },
-        {
-          "_type": "fader",
-          "ar": {
-            "message-id": "739",
-            "request-type": "SetVolume",
-            "source": "Lets Play LOL",
+            "source": "Virtual Sound",
             "volume": 0
           },
           "rn": "SetVolume"
         }
       ]
-    },
-    "81noteon": {
-      "channel": 0,
-      "note": 81,
-      "velocity": 127,
-      "_type": "noteon"
-    },
-    "81noteoff": {
-      "channel": 0,
-      "note": 81,
-      "velocity": 127,
-      "_type": "noteoff"
+    }
+  },
+  "2": {
+    "7cc": {
+      "channel": 2,
+      "controller": 7,
+      "value": 49,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "19",
+            "request-type": "SetVolume",
+            "source": "Mic/Aux 2",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    }
+  },
+  "3": {
+    "7cc": {
+      "channel": 3,
+      "controller": 7,
+      "value": 68,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "19",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    }
+  },
+  "4": {
+    "7cc": {
+      "channel": 4,
+      "controller": 7,
+      "value": 76,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "19",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    }
+  },
+  "5": {
+    "7cc": {
+      "channel": 5,
+      "controller": 7,
+      "value": 12,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "19",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]
     }
   },
   "6": {
+    "53noteon": {
+      "channel": 6,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteon",
+      "cmds": []
+    },
+    "53noteoff": {
+      "channel": 6,
+      "note": 53,
+      "velocity": 127,
+      "_type": "noteoff",
+      "cmds": []
+    },
     "7cc": {
       "channel": 6,
       "controller": 7,
-      "value": 66,
-      "_type": "cc"
-    }
-  },
-  "7": {
-    "7cc": {
-      "channel": 7,
-      "controller": 7,
-      "value": 63,
+      "value": 88,
       "_type": "cc",
       "cmds": [
         {
           "_type": "fader",
           "ar": {
-            "message-id": "739",
+            "message-id": "19",
             "request-type": "SetVolume",
             "source": "audiotest",
             "volume": 0
           },
           "rn": "SetVolume"
-        },
-        {
-          "_type": "fader",
-          "ar": {
-            "message-id": "739",
-            "request-type": "SetVolume",
-            "source": "Lets Play LOL",
-            "volume": 0
-          },
-          "rn": "SetVolume"
         }
       ]
-    },
+    }
+  },
+  "7": {
     "53noteon": {
       "channel": 7,
       "note": 53,
@@ -87,19 +188,9 @@
         {
           "_type": "fader",
           "ar": {
-            "message-id": "739",
+            "message-id": "19",
             "request-type": "SetVolume",
             "source": "audiotest",
-            "volume": 0
-          },
-          "rn": "SetVolume"
-        },
-        {
-          "_type": "fader",
-          "ar": {
-            "message-id": "739",
-            "request-type": "SetVolume",
-            "source": "Lets Play LOL",
             "volume": 0
           },
           "rn": "SetVolume"
@@ -111,52 +202,25 @@
       "note": 53,
       "velocity": 127,
       "_type": "noteoff",
+      "cmds": []
+    },
+    "7cc": {
+      "channel": 7,
+      "controller": 7,
+      "value": 44,
+      "_type": "cc",
       "cmds": [
         {
           "_type": "fader",
           "ar": {
-            "message-id": "739",
+            "message-id": "19",
             "request-type": "SetVolume",
             "source": "audiotest",
             "volume": 0
           },
           "rn": "SetVolume"
-        },
-        {
-          "_type": "fader",
-          "ar": {
-            "message-id": "739",
-            "request-type": "SetVolume",
-            "source": "Lets Play LOL",
-            "volume": 0
-          },
-          "rn": "SetVolume"
         }
       ]
-    },
-    "50noteon": {
-      "channel": 7,
-      "note": 50,
-      "velocity": 127,
-      "_type": "noteon"
-    },
-    "50noteoff": {
-      "channel": 7,
-      "note": 50,
-      "velocity": 127,
-      "_type": "noteoff"
-    },
-    "52noteon": {
-      "channel": 7,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteon"
-    },
-    "52noteoff": {
-      "channel": 7,
-      "note": 52,
-      "velocity": 127,
-      "_type": "noteoff"
     }
   }
 }

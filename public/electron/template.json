@@ -2,4 +2,4 @@
  "<li id='idinput' class='col-xs-12 col-md-6 pmd-z-depth pmd-list  list-group-item'><div class='media-left'><i  onclick='send(\"NC_SCENESWITCH\",\"data\");' class='material-icons md-dark pmd-md'>skip_next</i></a></div><div class='media-body media-middle'>option</div><i class='  media-middle '>sources</i></li>",
 "source":"<i id='vissourcename' onclick='send(\"NC_SOURCESW\",\"sourcename\")' class='material-icons md-dark pmd-sm'>visbol</i> sourcename ",
  "option":"<option value='midimapoutselect'>midimapoutselect</option>",
- "MIDIMapping":"<textarea class=''>midimapouttext</textarea>"}
+ "MIDIMapping":"<textarea id='midimapid' class=''>midimapouttext</textarea>"}

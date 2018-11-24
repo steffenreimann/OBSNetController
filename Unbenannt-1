@@ -1,1 +1,19 @@
-[{"rn":"SetCurrentScene","ar":{"scene-name":"Test"},"_type":"button"}]
+[
+    {"rn":"SetCurrentScene",
+     "ar":{"scene-name":"Test"},
+     "_type":"button"}
+]
+
+
+[
+        {
+          "_type": "fader",
+          "ar": {
+            "message-id": "739",
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0
+          },
+          "rn": "SetVolume"
+        }
+      ]

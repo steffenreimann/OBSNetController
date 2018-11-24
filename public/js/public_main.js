@@ -61,6 +61,9 @@ ipcRenderer.on('MIDI_Mapping', function(event, data){
     console.log(data);
     list('#out', data)
 });
+ipcRenderer.on('NC_SET_CONF', function(event, data){
+   saveMIDIMapping();
+});
 
 
 
@@ -98,6 +101,10 @@ $( "#activ_mapping" ).click(function() {
         send('f_mapping_stop');
     }
 });
+$( "#mapping" ).click(function() {
+    var checkbox = $('#mapping').prop('checked')
+        send('MIDIMH');
+});
 
 $( "#replaystart" ).click(function() {
     var buffertime = $( "#buffertime" ).val();
@@ -129,6 +136,7 @@ $( "#conn_switch" ).click(function() {
     }else{
        console.log('False'); 
         send('OBS_DC');
+        
     }
     
   });
@@ -157,37 +165,34 @@ function saveMIDIMapping(){
     
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
-            var midimapid = "#midimapid" + itemm.channel + itemm.note + itemm._type
-           
-            console.log(midimapid);
+            var midimapid = typeselector('midimapid', itemm)
+            console.log('MIDImapID = ' + midimapid);
+            var la
+            try {
+                var ch_cmd = document.getElementById(midimapid);
+                la = JSON.parse(ch_cmd.value);
+                
+            } catch(e) {
+                console.log(e); // error in the above string (in this case, yes)!
+                console.log('erroooorrrrrrr'); // error in the above string (in this case, yes)!
+                la = [];
+            }
             
-            var htmlString = $(midimapid).html()
-            console.log(htmlString);
-            var ch_cmd = document.getElementById(midimapid);
             
-            ch_cmd = JSON.parse(ch_cmd.value);
-            console.log(ch_cmd);
-            var mapp = {channel: itemm.channel, note: itemm.note, controller: itemm.controller, velocity: itemm.velocity, _type: itemm._type, cmds: ch_cmd }
-            //mapp = mapp.cmds.push(ch_cmd.value);
-            
+            console.log('ch_cmd.value = ' + la)
+            console.log(la);
+            var mapp = {channel: itemm.channel, note: itemm.note, controller: itemm.controller, velocity: itemm.velocity, _type: itemm._type, cmds: la }
             console.log(ch_cmd.value);
             console.log(mapp);
-            
             send('NC_SET_MAP','', mapp);
-            //console.log(selected_option_value);
         });
     });
-    
-   // list('#out', data)
 }
 
-function typeselector(msg){
-    if(msg._type == 'cc'){
-        return msg.channel + '.' + msg.controller + msg._type
-    }else{
-        return msg.channel + '.' + msg.note + msg._type
-    }
-}
+
+
+
+
 
 function list(name, data){
     
@@ -215,14 +220,15 @@ function list(name, data){
         var scene = replaceAll(model.html,mapObj );
         conlist0.push(scene);
         $(name).html(conlist0);
-         hljs.initHighlightingOnLoad();
+        
       }
     
     if(data.channel != undefined ){
-            var midimapid = "#midimapid" + data.channel + data.note + data._type
-            var midimapval = "#midimapval" + data.channel + data.note + data._type
-           
-        
+            var midimapid = typeselector("midimapid", data)
+            var midimapval = typeselector("midimapval", data)
+            var id = typeselector('blnk', data)
+            
+            
             //var mapObj_option = replaceAll(model.MIDIMapping, mapObj1 );
 
             var mapObj1 = {midimapid: midimapid, midimapouttext: JSON.stringify(data.cmds, undefined, 4) };
@@ -232,54 +238,40 @@ function list(name, data){
             //alert( 'data.cmds = ' + data.cmds);
            // alert( 'FIND MIDI_Mapping1 = ' + MIDI_Mapping1);
         
-            var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + ' // Note: ' + data.note + ' // CMD: ' + data._type + '' + MIDI_Mapping1, idinput: 'blnk' + data.channel + data.note + data._type, sources: '' };
+                
+        
+            var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + MIDI_Mapping1, idinput: id, sources: '' };
             var scene = replaceAll(model.html,mapObj );
         
         console.log(data); 
-        
-        
+        console.log('data = ' + data);
+        var ui = 1
         if(findInArray(conlist1, scene)){
-            var id = "#blnk" + data.channel + data.note + data._type
-            console.log('HTML id = ' + id);
+            var id2 = typeselector('#blnk', data)
+            console.log('HTML id = ' + id2);
             
             if(data._type == 'noteoff'){
-                    scrolldown(id)
+                    scrolldown(id2)
                }
             if(data._type == 'cc'){
-                    scrolldown(id)
+                    scrolldown(id2)
                }
             
-            $(id).addClass("list-group-item-success");
+            $(id2).addClass("list-group-item-success");
             //$(id).css({"background-color": "blue", "font-size": "100%"});
             setTimeout(function(){ 
                //$(id).css({"background-color": "red", "font-size": "100%"});
-                $(id).removeClass("list-group-item-success");
+                $(id2).removeClass("list-group-item-success");
             }, 500);
             
             
            }else{
                 conlist1.push(scene);
                 $(name).html(conlist1);
-               
-               
            }
-         
-        //document.getElementById(midimapid).value = data.cmds;
-    }; 
-        
-    
-
-    
-    ix++
-    //console.log(testing)
-   
-    
-	checkboxBSC = $('form input[type=checkbox]:checked').val();
-    //console.log(checkboxBSC)
-    
+    };  
 };
-     //model = model.toString()
-    
+
 
 // function to search array using for loop
 function findInArray(ar, val) {
@@ -293,6 +285,36 @@ function findInArray(ar, val) {
     return false;
 }
 
+function typeselector(id , msg){
+    if(msg._type == 'cc'){
+        return id + msg.channel + msg.controller + msg._type
+    }else{
+        return id + msg.channel + msg.note + msg._type
+    }
+}
+
+
+function boll(a, b){
+    console.log(a);
+    if(a != undefined && b != undefined){
+        if(msg._type == 'cc'){
+            if(a.channel == b.channel && a.controller == b.controller && a._type == b._type){
+                return true
+            }else{
+                return false
+            }
+        }else{
+            if(a.channel == b.channel && a.note == b.note && a._type == b._type){
+                return true
+            }else{
+                return false
+            }
+        }
+    }else{
+        return false
+    }
+}
+
 function replaceAll(str,mapObj){
     var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
 
@@ -302,7 +324,9 @@ function replaceAll(str,mapObj){
 }
 
 function scrolldown(q) {
-    var pos = $(q).position();    
+    console.log(q);
+    var pos = $(q).position(); 
+    console.log(pos);
     document.documentElement.scrollTop = document.body.scrollTop = pos.top;
 }
 
