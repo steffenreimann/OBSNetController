@@ -240,8 +240,8 @@ function list(name, data){
         
                 
         
-            var mapObj = {ix:data.note,option: ' Channel: ' + data.channel + MIDI_Mapping1, idinput: id, sources: '' };
-            var scene = replaceAll(model.html,mapObj );
+            var mapObj = {option: typeselector('', data) , idinput: id, sources: MIDI_Mapping1};
+            var scene = replaceAll(model.html2,mapObj );
         
         console.log(data); 
         console.log('data = ' + data);
@@ -336,11 +336,19 @@ function listdel() {
     
     $('#out').html(conlist1);
 }
+
 function test(){
     console.log("Hallo ich bin der test");
 }
+var jsonFNtest = {fn:"test"}
+//myNameSpace[jsonFNtest.fn]();
+window[jsonFNtest.fn]();
   
+var jsonFNtest = {fn:"test"}
 
+//myNameSpace[jsonFNtest.fn]();
+
+window[jsonFNtest.fn]();
 
 //loadMIDIMapping();
 $( "#buffertime" ).val(conf.replay.buffertime);

@@ -114,18 +114,24 @@
                         <button onclick="saveMIDIMapping()" type="button" class="btn btn-primary"> Sichern </button >
                         <button onclick="loadMIDIMapping()" type="button" class="btn btn-primary"> Laden </button >
                         <button onclick="listdel()" type="button" class="btn btn-primary"> Löschen </button >
-                        <div class="pmd-switch pull-right" >
-                            <label >
-                                <input id="activ_mapping" type="checkbox">
-                                <span class="pmd-switch-label pmd-checkbox-ripple-effect"> </span> 
-                                
-                            </label>
-                            <span class="pmd-switch-label" for="replay_buffer">Mapping Modus</span>
+                                            
+                    <!--Chips with text-->
+                        <div class="pmd-chip pmd-chip-no-icon pull-right">
+                            <div class="pmd-switch" >
+                                <label class="switch-text">
+                                    <input id="activ_mapping" type="checkbox">
+                                    <span class="pmd-switch-label pmd-checkbox-ripple-effect"> </span> 
+
+                                </label>
+                                <label class="pmd-switch-text" for="activ_mapping">Mapping Modus</label>
+                            </div>
                         </div>
+                    
+                        
                    
                     
                       
-                    <div class="panel-body" id="out">
+                    <div class="" id="out">
                     </div>
                 </div>
             </ul>

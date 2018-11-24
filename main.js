@@ -10,7 +10,9 @@ var easymidi = require('easymidi');
 let conf = editJsonFile('./config.json');
 let MIDImapping = editJsonFile('./mapping.json');
 let obs_f = editJsonFile('./obs_function.json');
-var device
+var device;
+
+
 
 // Reload it from the disk
 conf = editJsonFile(`${__dirname}/config.json`, {
@@ -25,6 +27,24 @@ MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
 var MIDIMapON = false;
 var OBSSendON = false;
 var MIDIMapHelper = false;
+
+
+
+
+
+var x = { }; // better would be to have module create an object
+var funcstr = "f1";
+var jsonFNtest = {fn:"f1",data: "lol data"}
+
+x.f1 = function(data)
+{
+    console.log('call a function by var');
+    console.log(data);
+}
+//rufe function mit hilfe eines Strings aus einm JSON File auf
+x[jsonFNtest.fn](jsonFNtest.data);
+ 
+
 
 
 //var index = require('./index.js');
@@ -204,7 +224,9 @@ ipcMain.on('MIDIMapping', (event, data) => {
                }else{
                    event.returnValue = MIDImapping.get()
                }
-    
+    MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
+                autosave: true
+            });
            
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
