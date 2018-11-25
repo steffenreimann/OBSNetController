@@ -7,6 +7,8 @@ var OBS_F = ipcRenderer.sendSync('OBS_F')
 var MIDIMapping
  var midilist = [];
 var conlist0 = [];
+// Key == id value = cmd(s)
+var conListDict = {};
 var conlist1 = [];
 var mapObj1
 var ix = 0;
@@ -229,7 +231,11 @@ function list(name, data){
             var id = typeselector('blnk', data)
             
             
+            
             //var mapObj_option = replaceAll(model.MIDIMapping, mapObj1 );
+            data.cmds.forEach(function(element) {
+                delete element['volume']
+            })
 
             var mapObj1 = {midimapid: midimapid, midimapouttext: JSON.stringify(data.cmds, undefined, 4) };
             var MIDI_Mapping1 = replaceAll(model.MIDIMapping, mapObj1 );
@@ -246,7 +252,8 @@ function list(name, data){
         console.log(data); 
         console.log('data = ' + data);
         var ui = 1
-        if(findInArray(conlist1, scene)){
+        // if(findInArray(conlist1, scene)){
+        if(conListDict[midimapid] !== undefined){
             var id2 = typeselector('#blnk', data)
             console.log('HTML id = ' + id2);
             
@@ -267,7 +274,8 @@ function list(name, data){
             
            }else{
                 conlist1.push(scene);
-                $(name).html(conlist1);
+                conListDict[midimapid] = scene; 
+                $(name).html(conListDict[midimapid]);
            }
     };  
 };
@@ -340,6 +348,7 @@ function listdel() {
 function test(){
     console.log("Hallo ich bin der test");
 }
+
 var jsonFNtest = {fn:"test"}
 //myNameSpace[jsonFNtest.fn]();
 window[jsonFNtest.fn]();

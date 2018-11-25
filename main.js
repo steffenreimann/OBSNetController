@@ -224,9 +224,10 @@ ipcMain.on('MIDIMapping', (event, data) => {
                }else{
                    event.returnValue = MIDImapping.get()
                }
+    
     MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
                 autosave: true
-            });
+    });
            
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
@@ -367,6 +368,7 @@ function MIDI(){
         
        
         device.on('message', function (msg) {
+            delete msg["message-id"];
             
             if(msg._type == 'cc' && !MIDIMapON){
                 ////console.log(msg);
@@ -408,14 +410,18 @@ function MIDI(){
                 }
             }
             if(MIDIMapON){
+                delete msg["message-id"];
+                
                 var i = typeselector(msg)
                 var a = MIDImapping.get(i)
+                
                 if(a != undefined){
                     if(boll(a,msg)){
                         mainWindow.webContents.send('MIDI_Mapping', a );
-                        //console.log(a);
+                        console.log('AAA ', a);
                     }
                 }else{
+                    console.log(msg);
                     mainWindow.webContents.send('MIDI_Mapping', msg );
                     MIDImapping.set(i, msg);
                 }

@@ -95,7 +95,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 0,
+          "volume": 0.3700999915599823,
           "x": 0,
           "y": 40
         },
@@ -193,7 +193,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 0,
+          "volume": 0.005831998307257891,
           "x": 0,
           "y": 0
         }
@@ -210,7 +210,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "wasapi_output_capture",
-          "volume": 0.6929000020027161,
+          "volume": 0.9843000173568726,
           "x": 0,
           "y": 0
         },
@@ -222,7 +222,7 @@
           "source_cx": 0,
           "source_cy": 0,
           "type": "ffmpeg_source",
-          "volume": 0,
+          "volume": 0.3700999915599823,
           "x": 0,
           "y": 0
         }
