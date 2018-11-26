@@ -20,7 +20,7 @@ var mapObj_option_html = []
 console.log(conf);
 
 
-    ipcRenderer.on('selectedFiles', function(e, data){
+ipcRenderer.on('selectedFiles', function(e, data){
         console.log(data);
         $( "#out" ).val(data.path);
     });
@@ -63,12 +63,10 @@ ipcRenderer.on('MIDI_Mapping', function(event, data){
     console.log(data);
     list('#out', data)
 });
+
 ipcRenderer.on('NC_SET_CONF', function(event, data){
    saveMIDIMapping();
 });
-
-
-
 
 $( "#obssave" ).click(function() {
       var ip = $( "#networkSectionIpAddress" ).val();
@@ -103,6 +101,7 @@ $( "#activ_mapping" ).click(function() {
         send('f_mapping_stop');
     }
 });
+
 $( "#mapping" ).click(function() {
     var checkbox = $('#mapping').prop('checked')
         send('MIDIMH');
@@ -116,6 +115,7 @@ $( "#replaystart" ).click(function() {
    send('OBS_REPLAY');
     
   });
+
 $( "#sendjsontest" ).click(function() {send('sendjsontest','replay');});
 
 $( "#saveMIDIMapping" ).click(function() {
@@ -191,11 +191,6 @@ function saveMIDIMapping(){
     });
 }
 
-
-
-
-
-
 function list(name, data){
     
    var model = require('./../electron/template.json');
@@ -233,18 +228,13 @@ function list(name, data){
             
             
             //var mapObj_option = replaceAll(model.MIDIMapping, mapObj1 );
-            data.cmds.forEach(function(element) {
-                delete element['volume']
-            })
-
+            
             var mapObj1 = {midimapid: midimapid, midimapouttext: JSON.stringify(data.cmds, undefined, 4) };
             var MIDI_Mapping1 = replaceAll(model.MIDIMapping, mapObj1 );
         
            // alert( 'model.MIDIMapping = ' + model.MIDIMapping);
             //alert( 'data.cmds = ' + data.cmds);
            // alert( 'FIND MIDI_Mapping1 = ' + MIDI_Mapping1);
-        
-                
         
             var mapObj = {option: typeselector('', data) , idinput: id, sources: MIDI_Mapping1};
             var scene = replaceAll(model.html2,mapObj );
@@ -273,13 +263,13 @@ function list(name, data){
             
             
            }else{
+               
                 conlist1.push(scene);
-                conListDict[midimapid] = scene; 
-                $(name).html(conListDict[midimapid]);
+                conListDict[midimapid] = midimapid; 
+                $(name).html(conlist1);
            }
     };  
 };
-
 
 // function to search array using for loop
 function findInArray(ar, val) {
@@ -300,7 +290,6 @@ function typeselector(id , msg){
         return id + msg.channel + msg.note + msg._type
     }
 }
-
 
 function boll(a, b){
     console.log(a);
@@ -341,7 +330,7 @@ function scrolldown(q) {
 
 function listdel() {
     conlist1 = [];
-    
+    conListDict = {};
     $('#out').html(conlist1);
 }
 
@@ -357,7 +346,7 @@ var jsonFNtest = {fn:"test"}
 
 //myNameSpace[jsonFNtest.fn]();
 
-window[jsonFNtest.fn]();
+//window[jsonFNtest.fn]();
 
 //loadMIDIMapping();
 $( "#buffertime" ).val(conf.replay.buffertime);

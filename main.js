@@ -41,6 +41,7 @@ x.f1 = function(data)
     console.log('call a function by var');
     console.log(data);
 }
+
 //rufe function mit hilfe eines Strings aus einm JSON File auf
 x[jsonFNtest.fn](jsonFNtest.data);
  
@@ -328,9 +329,6 @@ function test(){
 
 ipcMain.on('f_mapping_start', (event, data) => {
     MIDIMapON = true;
-})
-ipcMain.on('MIDIMH', (event, data) => {
-    MIDIMapHelper = data;
 })
 
 ipcMain.on('f_mapping_stop', (event, data) => {

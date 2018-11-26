@@ -4,13 +4,98 @@
       "channel": 0,
       "note": 55,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "55noteoff": {
       "channel": 0,
       "note": 55,
       "velocity": 127,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
+    },
+    "40noteon": {
+      "channel": 0,
+      "note": 40,
+      "velocity": 41,
+      "_type": "noteon",
+      "cmds": []
+    },
+    "40noteoff": {
+      "channel": 0,
+      "note": 40,
+      "velocity": 0,
+      "_type": "noteoff",
+      "cmds": []
+    },
+    "38noteon": {
+      "channel": 0,
+      "note": 38,
+      "velocity": 71,
+      "_type": "noteon",
+      "cmds": []
+    },
+    "38noteoff": {
+      "channel": 0,
+      "note": 38,
+      "velocity": 0,
+      "_type": "noteoff",
+      "cmds": []
+    },
+    "91cc": {
+      "channel": 0,
+      "controller": 91,
+      "value": 124,
+      "_type": "cc",
+      "cmds": []
+    },
+    "undefinedpitch": {
+      "channel": 0,
+      "value": 8064,
+      "_type": "pitch",
+      "cmds": []
+    },
+    "1cc": {
+      "channel": 0,
+      "controller": 1,
+      "value": 8,
+      "_type": "cc",
+      "cmds": []
+    },
+    "81cc": {
+      "channel": 0,
+      "controller": 81,
+      "value": 30,
+      "_type": "cc",
+      "cmds": []
+    },
+    "16cc": {
+      "channel": 0,
+      "controller": 16,
+      "value": 45,
+      "_type": "cc",
+      "cmds": []
+    },
+    "17cc": {
+      "channel": 0,
+      "controller": 17,
+      "value": 49,
+      "_type": "cc",
+      "cmds": []
+    },
+    "111cc": {
+      "channel": 0,
+      "controller": 111,
+      "value": 6,
+      "_type": "cc",
+      "cmds": []
+    },
+    "18cc": {
+      "channel": 0,
+      "controller": 18,
+      "value": 7,
+      "_type": "cc",
+      "cmds": []
     }
   },
   "5": {
@@ -18,7 +103,8 @@
       "channel": 5,
       "controller": 7,
       "value": 124,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     }
   },
   "6": {
@@ -26,7 +112,8 @@
       "channel": 6,
       "controller": 7,
       "value": 67,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     }
   },
   "7": {
@@ -41,7 +128,7 @@
           "ar": {
             "request-type": "SetVolume",
             "source": "Virtual Sound",
-            "volume": 0.4724
+            "volume": 0
           },
           "rn": "SetVolume"
         },
@@ -50,11 +137,31 @@
           "ar": {
             "request-type": "SetVolume",
             "source": "audiotest",
-            "volume": 0.4724
+            "volume": 0
+          },
+          "fn": {
+            "ar": "test string",
+            "f": "testfuc"
           },
           "rn": "SetVolume"
         }
       ]
+    }
+  },
+  "15": {
+    "111cc": {
+      "channel": 15,
+      "controller": 111,
+      "value": 127,
+      "_type": "cc",
+      "cmds": []
+    },
+    "110cc": {
+      "channel": 15,
+      "controller": 110,
+      "value": 127,
+      "_type": "cc",
+      "cmds": []
     }
   }
 }
