@@ -8,11 +8,13 @@
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"OBSNetControl\"",
     "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
-    "rebuild": "electron-rebuild -f -w easymidi"
+    "rebuild": "electron-rebuild -f -w easymidi",
+    "test": "node testt.js"
   },
   "author": "Steffen Reimann",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "easymidi": "^1.0.1",
     "edit-json-file": "^1.1.0",
     "express": "^4.16.4",

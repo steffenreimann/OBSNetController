@@ -1,0 +1,16 @@
+{
+  "0": {
+    "name": "Akai APC20",
+    "nameID": "Akai APC20 0",
+    "id": "0",
+    "MapPath": "./json/mappings/Akai_APC20.json",
+    "fn": ""
+  },
+  "1": {
+    "name": "TouchOSC Bridge",
+    "nameID": "TouchOSC Bridge 1",
+    "id": "1",
+    "MapPath": "./json/mappings/TouchOSC_Bridge.json",
+    "fn": ""
+  }
+}

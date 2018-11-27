@@ -1,6 +1,6 @@
   const electron = require('electron');
     const {ipcRenderer} = electron;
-    
+    const {dialog} = require('electron').remote;
 
 var conf = ipcRenderer.sendSync('NC_GET_CONF')
 var OBS_F = ipcRenderer.sendSync('OBS_F')
@@ -10,6 +10,7 @@ var conlist0 = [];
 // Key == id value = cmd(s)
 var conListDict = {};
 var conlist1 = [];
+var devicelist1 = [];
 var mapObj1
 var ix = 0;
 var data1 = "";
@@ -142,6 +143,17 @@ $( "#conn_switch" ).click(function() {
     }
     
   });
+
+$( "#save-json-file" ).click(function() {
+    console.log(path)
+    
+    
+   
+    
+  });
+
+
+
     
 function send(name,cmd,d){
     ipcRenderer.send(name, {'cmd': cmd, 'd': d } , () => { 
@@ -154,12 +166,34 @@ function loadMIDIMapping(){
    
     //$('#out').html(conlist1);
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
+    DeviceList = ipcRenderer.sendSync('DeviceList')
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
             list('#out', itemm)
         });
     });
+
+    $.each(DeviceList, function(i, item) {
+        var kk = {device: item}
+        console.log(item);
+        list('#devices_out', item )
+    });
 }
+
+function openfile(data){
+    console.log(data);
+    dialog.showOpenDialog({
+        properties: ['openFile']
+    }, function (files) {
+        if (files !== undefined) {
+            // handle files
+            console.log(files)
+            $('#' + data).val(files[0]) 
+            
+        }
+    });
+}
+
 
 function saveMIDIMapping(){
     
@@ -268,8 +302,23 @@ function list(name, data){
                 conListDict[midimapid] = midimapid; 
                 $(name).html(conlist1);
            }
-    };  
+    }; 
+    if(data.MapPath != undefined ){
+        console.log('data.deviceselector', deviceselector(data));
+        console.log('data.device', data.nameID);
+        
+        var mapObj2 = {openfileID: "tst", IDName: "test", MapPath: data.MapPath};
+        console.log('mapObj2 ', mapObj2);
+        var MIDI_Devices_HTML = replaceAll(model.MIDIDevices, mapObj2 );
+        console.log('html ', MIDI_Devices_HTML);             
+        devicelist1.push(MIDI_Devices_HTML);
+        $(name).html(devicelist1);
+    }
 };
+
+function deviceselector(msg){
+        return msg.id + msg.name
+}
 
 // function to search array using for loop
 function findInArray(ar, val) {

@@ -1,0 +1,405 @@
+{
+  "0": {
+    "55noteon": {
+      "channel": 0,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteon",
+      "cmds": []
+    },
+    "55noteoff": {
+      "channel": 0,
+      "note": 55,
+      "velocity": 127,
+      "_type": "noteoff",
+      "cmds": []
+    },
+    "40noteon": {
+      "channel": 0,
+      "note": 40,
+      "velocity": 41,
+      "_type": "noteon",
+      "cmds": []
+    },
+    "40noteoff": {
+      "channel": 0,
+      "note": 40,
+      "velocity": 0,
+      "_type": "noteoff",
+      "cmds": []
+    },
+    "38noteon": {
+      "channel": 0,
+      "note": 38,
+      "velocity": 71,
+      "_type": "noteon",
+      "cmds": []
+    },
+    "38noteoff": {
+      "channel": 0,
+      "note": 38,
+      "velocity": 0,
+      "_type": "noteoff",
+      "cmds": []
+    },
+    "91cc": {
+      "channel": 0,
+      "controller": 91,
+      "value": 124,
+      "_type": "cc",
+      "cmds": []
+    },
+    "undefinedpitch": {
+      "channel": 0,
+      "value": 8064,
+      "_type": "pitch",
+      "cmds": []
+    },
+    "1cc": {
+      "channel": 0,
+      "controller": 1,
+      "value": 8,
+      "_type": "cc",
+      "cmds": []
+    },
+    "81cc": {
+      "channel": 0,
+      "controller": 81,
+      "value": 30,
+      "_type": "cc",
+      "cmds": []
+    },
+    "16cc": {
+      "channel": 0,
+      "controller": 16,
+      "value": 45,
+      "_type": "cc",
+      "cmds": []
+    },
+    "17cc": {
+      "channel": 0,
+      "controller": 17,
+      "value": 49,
+      "_type": "cc",
+      "cmds": []
+    },
+    "111cc": {
+      "channel": 0,
+      "controller": 111,
+      "value": 6,
+      "_type": "cc",
+      "cmds": []
+    },
+    "18cc": {
+      "channel": 0,
+      "controller": 18,
+      "value": 7,
+      "_type": "cc",
+      "cmds": []
+    },
+    "7cc": {
+      "channel": 0,
+      "controller": 7,
+      "value": 65,
+      "_type": "cc"
+    },
+    "9cc": {
+      "channel": 0,
+      "controller": 9,
+      "value": 61,
+      "_type": "cc"
+    },
+    "8cc": {
+      "channel": 0,
+      "controller": 8,
+      "value": 68,
+      "_type": "cc"
+    },
+    "26cc": {
+      "channel": 0,
+      "controller": 26,
+      "value": 127,
+      "_type": "cc"
+    },
+    "0cc": {
+      "channel": 0,
+      "controller": 0,
+      "value": 0,
+      "_type": "cc"
+    },
+    "3cc": {
+      "channel": 0,
+      "controller": 3,
+      "value": 0,
+      "_type": "cc"
+    },
+    "10cc": {
+      "channel": 0,
+      "controller": 10,
+      "value": 0,
+      "_type": "cc"
+    },
+    "11cc": {
+      "channel": 0,
+      "controller": 11,
+      "value": 29,
+      "_type": "cc"
+    },
+    "28cc": {
+      "channel": 0,
+      "controller": 28,
+      "value": 0,
+      "_type": "cc"
+    },
+    "35cc": {
+      "channel": 0,
+      "controller": 35,
+      "value": 0,
+      "_type": "cc"
+    },
+    "36cc": {
+      "channel": 0,
+      "controller": 36,
+      "value": 127,
+      "_type": "cc"
+    },
+    "37cc": {
+      "channel": 0,
+      "controller": 37,
+      "value": 0,
+      "_type": "cc"
+    },
+    "38cc": {
+      "channel": 0,
+      "controller": 38,
+      "value": 127,
+      "_type": "cc"
+    },
+    "29cc": {
+      "channel": 0,
+      "controller": 29,
+      "value": 127,
+      "_type": "cc"
+    },
+    "30cc": {
+      "channel": 0,
+      "controller": 30,
+      "value": 127,
+      "_type": "cc"
+    },
+    "31cc": {
+      "channel": 0,
+      "controller": 31,
+      "value": 127,
+      "_type": "cc"
+    },
+    "32cc": {
+      "channel": 0,
+      "controller": 32,
+      "value": 127,
+      "_type": "cc"
+    },
+    "20cc": {
+      "channel": 0,
+      "controller": 20,
+      "value": 127,
+      "_type": "cc"
+    },
+    "21cc": {
+      "channel": 0,
+      "controller": 21,
+      "value": 127,
+      "_type": "cc"
+    },
+    "19cc": {
+      "channel": 0,
+      "controller": 19,
+      "value": 29,
+      "_type": "cc"
+    }
+  },
+  "1": {
+    "7cc": {
+      "channel": 1,
+      "controller": 7,
+      "value": 44,
+      "_type": "cc"
+    },
+    "7noteon": {
+      "channel": 1,
+      "note": 7,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "6noteon": {
+      "channel": 1,
+      "note": 6,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "5noteon": {
+      "channel": 1,
+      "note": 5,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "4noteon": {
+      "channel": 1,
+      "note": 4,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "4noteoff": {
+      "channel": 1,
+      "note": 4,
+      "velocity": 0,
+      "_type": "noteoff"
+    },
+    "5noteoff": {
+      "channel": 1,
+      "note": 5,
+      "velocity": 0,
+      "_type": "noteoff"
+    },
+    "6noteoff": {
+      "channel": 1,
+      "note": 6,
+      "velocity": 0,
+      "_type": "noteoff"
+    },
+    "7noteoff": {
+      "channel": 1,
+      "note": 7,
+      "velocity": 0,
+      "_type": "noteoff"
+    }
+  },
+  "2": {
+    "0noteon": {
+      "channel": 2,
+      "note": 0,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "1noteon": {
+      "channel": 2,
+      "note": 1,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "2noteon": {
+      "channel": 2,
+      "note": 2,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "3noteon": {
+      "channel": 2,
+      "note": 3,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "2noteoff": {
+      "channel": 2,
+      "note": 2,
+      "velocity": 0,
+      "_type": "noteoff"
+    },
+    "1noteoff": {
+      "channel": 2,
+      "note": 1,
+      "velocity": 0,
+      "_type": "noteoff"
+    },
+    "3noteoff": {
+      "channel": 2,
+      "note": 3,
+      "velocity": 0,
+      "_type": "noteoff"
+    },
+    "0noteoff": {
+      "channel": 2,
+      "note": 0,
+      "velocity": 0,
+      "_type": "noteoff"
+    }
+  },
+  "5": {
+    "7cc": {
+      "channel": 5,
+      "controller": 7,
+      "value": 124,
+      "_type": "cc",
+      "cmds": []
+    }
+  },
+  "6": {
+    "7cc": {
+      "channel": 6,
+      "controller": 7,
+      "value": 67,
+      "_type": "cc",
+      "cmds": []
+    }
+  },
+  "7": {
+    "7cc": {
+      "channel": 7,
+      "controller": 7,
+      "value": 92,
+      "_type": "cc",
+      "cmds": [
+        {
+          "_type": "fader",
+          "ar": {
+            "request-type": "SetVolume",
+            "source": "Virtual Sound",
+            "volume": 0.5354
+          },
+          "rn": "SetVolume"
+        },
+        {
+          "_type": "fader",
+          "ar": {
+            "request-type": "SetVolume",
+            "source": "audiotest",
+            "volume": 0.5354
+          },
+          "fn": {
+            "ar": "test string",
+            "f": "testfuc"
+          },
+          "rn": "SetVolume"
+        }
+      ]
+    }
+  },
+  "15": {
+    "111cc": {
+      "channel": 15,
+      "controller": 111,
+      "value": 127,
+      "_type": "cc",
+      "cmds": []
+    },
+    "110cc": {
+      "channel": 15,
+      "controller": 110,
+      "value": 127,
+      "_type": "cc",
+      "cmds": []
+    },
+    "1noteon": {
+      "channel": 15,
+      "note": 1,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "2noteon": {
+      "channel": 15,
+      "note": 2,
+      "velocity": 127,
+      "_type": "noteon"
+    }
+  }
+}

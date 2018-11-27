@@ -102,6 +102,23 @@
             </div>
 		</div>
 	</div>
+    	<div class="panel panel-info"> 
+		<div class="panel-heading" role="tab" id="headingsix">
+			<h4 class="panel-title"><a  data-toggle="collapse" data-parent="#accordion4" href="#collapsesix" aria-expanded="false" aria-controls="collapsesix"  data-expandable="false"><i class="material-icons pmd-sm pmd-accordion-icon-left">account_box</i> MIDI Devices </a> </h4>
+		</div>
+		<div id="collapsesix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingsix">
+			<div class="panel-body">
+                
+                
+                <div id="devices_out">
+                    
+                </div>
+           
+               
+                 
+            </div>
+		</div>
+	</div>
     <div class="panel panel-info"> 
 		<div class="panel-heading" role="tab" id="heading5">
 			<h4 class="panel-title"><a  data-toggle="collapse" data-parent="#accordion5" href="#collapse5" aria-expanded="false" aria-controls="collapse5"  data-expandable="false"><i class="material-icons pmd-sm pmd-accordion-icon-left">view_module</i> Mapping </a> </h4>
@@ -112,6 +129,7 @@
                     
                     
                         <button onclick="saveMIDIMapping()" type="button" class="btn btn-primary"> Sichern </button >
+                        <button id="save-json-file" type="button" class="btn btn-primary"> JSON Sichern </button >
                         <button onclick="loadMIDIMapping()" type="button" class="btn btn-primary"> Laden </button >
                         <button onclick="listdel()" type="button" class="btn btn-primary"> Löschen </button >
                                             

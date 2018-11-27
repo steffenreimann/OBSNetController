@@ -7,18 +7,23 @@ const OBSWebSocket = require('obs-websocket-js');
 const obs = new OBSWebSocket();
 var easymidi = require('easymidi');
 
-let conf = editJsonFile('./config.json');
-let MIDImapping = editJsonFile('./mapping.json');
-let obs_f = editJsonFile('./obs_function.json');
-var device;
+let conf = editJsonFile('./json/config.json');
+let MIDImapping = editJsonFile('./json/mapping.json');
+let obs_f = editJsonFile('./json/obs_function.json');
+let devices_config = editJsonFile('./json/devices.json');
+
+var devicesarr = [];
 
 
 
 // Reload it from the disk
-conf = editJsonFile(`${__dirname}/config.json`, {
+conf = editJsonFile(`${__dirname}/json/config.json`, {
     autosave: true
 });
-MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
+MIDImapping = editJsonFile(`${__dirname}/json/mapping.json`, {
+    autosave: true
+});
+devices_config = editJsonFile(`${__dirname}/json/devices.json`, {
     autosave: true
 });
 
@@ -215,7 +220,7 @@ ipcMain.on('NC_GET_CONF', (event, data) => {
 })
 ipcMain.on('MIDIMapping', (event, data) => {
            ////console.log("OBS_Start : " + JSON.stringify(data));
-            MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
+            MIDImapping = editJsonFile(`${__dirname}/json/mapping.json`, {
                 autosave: true
             });
             if(data != undefined){
@@ -226,13 +231,23 @@ ipcMain.on('MIDIMapping', (event, data) => {
                    event.returnValue = MIDImapping.get()
                }
     
-    MIDImapping = editJsonFile(`${__dirname}/mapping.json`, {
+    MIDImapping = editJsonFile(`${__dirname}/json/mapping.json`, {
                 autosave: true
     });
            
     //var c = conf.get()
    // mainWindow.webContents.send('LIST', {"name": "scenes", "data": c.scenes} );
 })
+
+ipcMain.on('DeviceList', (event, data) => {
+           ////console.log("OBS_Start : " + JSON.stringify(data));
+            DeviceList = editJsonFile(`${__dirname}/json/devices.json`, {
+                autosave: true
+            });
+            event.returnValue = DeviceList.get()
+})
+
+
 ipcMain.on('OBS_F', (event, data) => {
            event.returnValue = obs_f.get()
 })
@@ -337,41 +352,74 @@ ipcMain.on('f_mapping_stop', (event, data) => {
     OBSSendON = false;
 }) 
 
-function MIDI(){
-   
+
+var MD = { }; // better would be to have module create an object
+
+var funcstr = "f1";
+var jsonFNtest = {fn: "getDevices"}
+
+
+MD.getDevices = function(){
+    var devices = easymidi.getInputs();
+    //console.log(diveces)
+    if(devices != ""){
+            return devices
+       }else{
+            return false
+       }
+}
+
+MD.setDevice = function(data){
     easymidi.getInputs().forEach(function(inputName){
-        
-        device = new easymidi.Input(inputName);
-        ////console.log(device)
-    }); 
+        var space = ' ';
+        var splittet = splitString(inputName, space);
+        var devID = splittet[splittet.length - 1]
     
-    easymidi.getOutputs().forEach(function(outName){
+        var deviceName = splittet
+        deviceName.pop(1)
+        var PathName = deviceName.join('_')
+        deviceName = deviceName.join(space)
+        deviceName = deviceName.toString();
+        var dconf = devices_config.get()
+        var n = {"nameID": deviceName + space + devID, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
+        console.log('var deviceName = ', n);
+        devices_config.set(devID,n);
         
-        outdevice = new easymidi.Output(outName);
-        //console.log(outName)
-        outdevice.send('noteon', {
-          "channel": 6,
-          "note": 53,
-          "velocity": 01
-        })
-         
-        outdevice.send('noteon', {
-            "channel": 7,
-          "note": 53,
-          "velocity": 05
-        })
     }); 
+}
+
+MD.ActivMap = function(data){
+    d = devices_config.get(data);
+    console.log('ActivMap Data = ',data);
+    console.log('ActivMap = ',d);   
+    var t = new easymidi.Input(d.nameID);
+   // MD.message(t);
+    MD.MIDI(t, d)
+}
+
+MD.message = function(data){
+    data.on('message', function (msg) {
+        console.log(msg);
+    });
+}
+
+MD.getMapping = function(data){
     
+}
+
+MD.MIDI = function(device, data){
+    var device_map = editJsonFile(data.MapPath, {
+        autosave: true
+    });
+   
     if(device != "" && device != undefined){
-        
-       
         device.on('message', function (msg) {
             delete msg["message-id"];
-            
+            console.log(msg);
             if(msg._type == 'cc' && !MIDIMapON){
                 ////console.log(msg);
                 var i = typeselector(msg)
-                var a = MIDImapping.get(i)
+                var a = device_map.get(i)
                 if(boll(a,msg)){
                     if(a.cmds != undefined){
                         a.cmds.forEach(function(element) {
@@ -393,7 +441,7 @@ function MIDI(){
                     
             }else if(OBSSendON && !MIDIMapON){
                 var i = typeselector(msg)
-                var a = MIDImapping.get(i)
+                var a = device_map.get(i)
                 //console.log(JSON.stringify(a.cmds));
                 //console.log(a);
                 if(boll(a,msg)){
@@ -411,7 +459,7 @@ function MIDI(){
                 delete msg["message-id"];
                 
                 var i = typeselector(msg)
-                var a = MIDImapping.get(i)
+                var a = device_map.get(i)
                 
                 if(a != undefined){
                     if(boll(a,msg)){
@@ -421,11 +469,31 @@ function MIDI(){
                 }else{
                     console.log(msg);
                     mainWindow.webContents.send('MIDI_Mapping', msg );
-                    MIDImapping.set(i, msg);
+                    device_map.set(i, msg);
                 }
             }
         });  
     }
+}
+
+ipcMain.on('SaveFile', (event, data) => {
+           savefile(data)
+})
+
+function savefile(data) {
+    const {dialog} = require('electron') 
+    const fs = require('fs') 
+    console.log(data.name)
+    console.log(data.path)
+    console.log(data.packSize)
+    dialog.showSaveDialog({ filters: [
+     { defaultPath: data.path, title: data.name, name: 'zip', extensions: ['zip'] }
+    ]}, function (fileName) {
+    if (fileName === undefined) return;
+        console.log(fileName)
+        //split(data.path, data.packSize, fileName);
+        fs.writeFile(fileName, data, function (err) { });
+  }); 
 }
 
 function typeselector(msg){
@@ -450,6 +518,18 @@ function boll(a, b){
     }
 }
 
+//rufe function mit hilfe eines Strings aus einm JSON File auf
+console.log(MD[jsonFNtest.fn]())
+
+function splitString(stringToSplit, separator) {
+  var arrayOfStrings = stringToSplit.split(separator);
+    return arrayOfStrings
+    
+  console.log('The original string is: "' + stringToSplit + '"');
+  console.log('The separator is: "' + separator + '"');
+  console.log('The array has ' + arrayOfStrings.length + ' elements: ' + arrayOfStrings.join(' / '));
+}
+
 var ffpk = MIDImapping.get("0")
 //console.log(ffpk);
 
@@ -472,4 +552,7 @@ function testing(msg){
 }
 
 
-MIDI()
+
+MD.setDevice();
+    MD.ActivMap("0");
+    MD.ActivMap("1");
