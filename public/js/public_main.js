@@ -189,7 +189,9 @@ function openfile(data){
             // handle files
             console.log(files)
             $('#' + data).val(files[0]) 
-            
+            ipcRenderer.send('openMapWindow', {'data': data, 'path': files[0] } , () => { 
+            console.log("Event sent."); 
+            })
         }
     });
 }
@@ -302,12 +304,13 @@ function list(name, data){
                 conListDict[midimapid] = midimapid; 
                 $(name).html(conlist1);
            }
-    }; 
+    }
     if(data.MapPath != undefined ){
         console.log('data.deviceselector', deviceselector(data));
-        console.log('data.device', data.nameID);
+        console.log('data.device', JSON.stringify(data));
+        var u = data.name
+        var mapObj2 = {openfileID: data.domID, IDName: data.name, MapPath: data.MapPath};
         
-        var mapObj2 = {openfileID: "tst", IDName: "test", MapPath: data.MapPath};
         console.log('mapObj2 ', mapObj2);
         var MIDI_Devices_HTML = replaceAll(model.MIDIDevices, mapObj2 );
         console.log('html ', MIDI_Devices_HTML);             
@@ -363,16 +366,18 @@ function boll(a, b){
 
 function replaceAll(str,mapObj){
     var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
-
+    console.log(re);
     return str.replace(re, function(matched){
-        return mapObj[matched.toLowerCase()];
+        //console.log(mapObj);
+        //console.log(matched);
+        return mapObj[matched];
     });
 }
 
 function scrolldown(q) {
-    console.log(q);
+    //console.log(q);
     var pos = $(q).position(); 
-    console.log(pos);
+    //console.log(pos);
     document.documentElement.scrollTop = document.body.scrollTop = pos.top;
 }
 

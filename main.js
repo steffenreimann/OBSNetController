@@ -102,22 +102,23 @@ app.on('ready', function(){
 });
 
 // Handle add item window
-function createAddWindow(){
-  addWindow = new BrowserWindow({
+function createMapWindow(data){
+  MapWindow = new BrowserWindow({
     width: 1000,
     height:500,
     title:'OBS Net Control'
   });
     
-  addWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'public/electron/addWindow.html'),
+  MapWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'public/electron/mapWindow.html'),
     protocol: 'file:',
     slashes:true
   }));
     
+    
   // Handle garbage collection
-  addWindow.on('close', function(){
-    addWindow = null;
+  MapWindow.on('close', function(){
+    MapWindow = null;
   });
 }
  // Create menu template
@@ -145,7 +146,7 @@ const mainMenuTemplate =  [
 ];
 // If OSX, add empty object to menu
 if(process.platform == 'darwin'){
-  mainMenuTemplate.unshift({});
+ // mainMenuTemplate.unshift({});
 }
 // Add developer tools option if in dev
 if(process.env.NODE_ENV !== 'production'){
@@ -183,6 +184,13 @@ function loadHTML(data){
 function setJSON(data) {
 	conf.set(data.name, data.val);
 }
+
+ipcMain.on('openMapWindow', (event, data) => {
+    console.log("openMapWindow : " + data);
+    createMapWindow(data);
+})
+
+
 
 ipcMain.on('DOM', (event, data) => {
            //console.log("DOM Data : " + data);
@@ -381,7 +389,7 @@ MD.setDevice = function(data){
         deviceName = deviceName.join(space)
         deviceName = deviceName.toString();
         var dconf = devices_config.get()
-        var n = {"nameID": deviceName + space + devID, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
+        var n = {"domID": PathName, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
         console.log('var deviceName = ', n);
         devices_config.set(devID,n);
         
