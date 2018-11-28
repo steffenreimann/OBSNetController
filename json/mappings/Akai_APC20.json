@@ -5,6 +5,46 @@
       "controller": 47,
       "value": 126,
       "_type": "cc"
+    },
+    "7cc": {
+      "channel": 0,
+      "controller": 7,
+      "value": 90,
+      "_type": "cc"
+    },
+    "14cc": {
+      "channel": 0,
+      "controller": 14,
+      "value": 18,
+      "_type": "cc"
+    }
+  },
+  "3": {
+    "7cc": {
+      "channel": 3,
+      "controller": 7,
+      "value": 90,
+      "_type": "cc"
+    },
+    "50noteon": {
+      "channel": 3,
+      "note": 50,
+      "velocity": 127,
+      "_type": "noteon"
+    },
+    "50noteoff": {
+      "channel": 3,
+      "note": 50,
+      "velocity": 127,
+      "_type": "noteoff"
+    }
+  },
+  "4": {
+    "7cc": {
+      "channel": 4,
+      "controller": 7,
+      "value": 124,
+      "_type": "cc"
     }
   },
   "5": {

@@ -13,7 +13,7 @@ let obs_f = editJsonFile('./json/obs_function.json');
 let devices_config = editJsonFile('./json/devices.json');
 
 var devicesarr = [];
-
+var MapWindowDATA
 
 
 // Reload it from the disk
@@ -106,7 +106,7 @@ function createMapWindow(data){
   MapWindow = new BrowserWindow({
     width: 1000,
     height:500,
-    title:'OBS Net Control'
+    title:'Mapping Edit'
   });
     
   MapWindow.loadURL(url.format({
@@ -114,7 +114,6 @@ function createMapWindow(data){
     protocol: 'file:',
     slashes:true
   }));
-    
     
   // Handle garbage collection
   MapWindow.on('close', function(){
@@ -171,6 +170,7 @@ var config = conf.toObject()
 ipcMain.on('event', (event, data) => { 
    
 }) 
+
 function loadHTML(data){
 	mainWindow.loadURL(url.format({
 	    pathname: path.join(__dirname, data),
@@ -180,7 +180,6 @@ function loadHTML(data){
     
 }
 
-
 function setJSON(data) {
 	conf.set(data.name, data.val);
 }
@@ -188,6 +187,12 @@ function setJSON(data) {
 ipcMain.on('openMapWindow', (event, data) => {
     console.log("openMapWindow : " + data);
     createMapWindow(data);
+    MapWindowDATA = data
+})
+
+ipcMain.on('MapWindowData', (event, data) => {
+    console.log("openMapWindow : " + data);
+    event.returnValue = MapWindowDATA;
 })
 
 
@@ -378,29 +383,36 @@ MD.getDevices = function(){
 }
 
 MD.setDevice = function(data){
-    easymidi.getInputs().forEach(function(inputName){
+    var ActivDevs = easymidi.getInputs(); 
+    var d = devices_config.get();
+    
+    for (var id in d) {
+        devices_config.set(id + '.isAlive',false);
+    }
+    
+    ActivDevs.forEach(function(inputName){
         var space = ' ';
         var splittet = splitString(inputName, space);
         var devID = splittet[splittet.length - 1]
-    
         var deviceName = splittet
         deviceName.pop(1)
         var PathName = deviceName.join('_')
         deviceName = deviceName.join(space)
         deviceName = deviceName.toString();
         var dconf = devices_config.get()
-        var n = {"domID": PathName, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
+        var n = {"isAlive": true, "domID": PathName, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
         console.log('var deviceName = ', n);
-        devices_config.set(devID,n);
-        
+        devices_config.set(PathName,n); 
     }); 
 }
 
 MD.ActivMap = function(data){
+    console.log(data);
     d = devices_config.get(data);
     console.log('ActivMap Data = ',data);
     console.log('ActivMap = ',d);   
-    var t = new easymidi.Input(d.nameID);
+    var name = d.name + ' ' + d.id
+    var t = new easymidi.Input(name);
    // MD.message(t);
     MD.MIDI(t, d)
 }
@@ -562,5 +574,5 @@ function testing(msg){
 
 
 MD.setDevice();
-    MD.ActivMap("0");
-    MD.ActivMap("1");
+MD.ActivMap("Akai_APC20");
+MD.ActivMap("TouchOSC_Bridge");

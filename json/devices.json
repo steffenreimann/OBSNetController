@@ -1,15 +1,17 @@
 {
-  "0": {
-    "name": "Akai APC20",
-    "domID": "Akai_APC20_0",
+  "Akai_APC20": {
+    "isAlive": false,
+    "domID": "Akai_APC20",
     "id": "0",
+    "name": "Akai APC20",
     "MapPath": "./json/mappings/Akai_APC20.json",
     "fn": ""
   },
-  "1": {
+  "TouchOSC_Bridge": {
+    "isAlive": true,
+    "domID": "TouchOSC_Bridge",
+    "id": "0",
     "name": "TouchOSC Bridge",
-    "domID": "TouchOSC_Bridge_1",
-    "id": "1",
     "MapPath": "./json/mappings/TouchOSC_Bridge.json",
     "fn": ""
   }

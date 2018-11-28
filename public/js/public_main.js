@@ -162,8 +162,8 @@ function send(name,cmd,d){
 }
 
 function loadMIDIMapping(){
-   // var conlist1 = [];
-   
+    conlist1 = [];
+    devicelist1 = [];
     //$('#out').html(conlist1);
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     DeviceList = ipcRenderer.sendSync('DeviceList')
@@ -306,11 +306,8 @@ function list(name, data){
            }
     }
     if(data.MapPath != undefined ){
-        console.log('data.deviceselector', deviceselector(data));
         console.log('data.device', JSON.stringify(data));
-        var u = data.name
         var mapObj2 = {openfileID: data.domID, IDName: data.name, MapPath: data.MapPath};
-        
         console.log('mapObj2 ', mapObj2);
         var MIDI_Devices_HTML = replaceAll(model.MIDIDevices, mapObj2 );
         console.log('html ', MIDI_Devices_HTML);             
@@ -319,9 +316,6 @@ function list(name, data){
     }
 };
 
-function deviceselector(msg){
-        return msg.id + msg.name
-}
 
 // function to search array using for loop
 function findInArray(ar, val) {
