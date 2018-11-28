@@ -101,121 +101,141 @@
       "channel": 0,
       "controller": 7,
       "value": 65,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "9cc": {
       "channel": 0,
       "controller": 9,
       "value": 61,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "8cc": {
       "channel": 0,
       "controller": 8,
       "value": 68,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "26cc": {
       "channel": 0,
       "controller": 26,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "0cc": {
       "channel": 0,
       "controller": 0,
       "value": 0,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "3cc": {
       "channel": 0,
       "controller": 3,
       "value": 0,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "10cc": {
       "channel": 0,
       "controller": 10,
       "value": 0,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "11cc": {
       "channel": 0,
       "controller": 11,
       "value": 29,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "28cc": {
       "channel": 0,
       "controller": 28,
       "value": 0,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "35cc": {
       "channel": 0,
       "controller": 35,
       "value": 0,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "36cc": {
       "channel": 0,
       "controller": 36,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "37cc": {
       "channel": 0,
       "controller": 37,
       "value": 0,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "38cc": {
       "channel": 0,
       "controller": 38,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "29cc": {
       "channel": 0,
       "controller": 29,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "30cc": {
       "channel": 0,
       "controller": 30,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "31cc": {
       "channel": 0,
       "controller": 31,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "32cc": {
       "channel": 0,
       "controller": 32,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "20cc": {
       "channel": 0,
       "controller": 20,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "21cc": {
       "channel": 0,
       "controller": 21,
       "value": 127,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "19cc": {
       "channel": 0,
       "controller": 19,
       "value": 29,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     }
   },
   "1": {
@@ -223,55 +243,64 @@
       "channel": 1,
       "controller": 7,
       "value": 44,
-      "_type": "cc"
+      "_type": "cc",
+      "cmds": []
     },
     "7noteon": {
       "channel": 1,
       "note": 7,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "6noteon": {
       "channel": 1,
       "note": 6,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "5noteon": {
       "channel": 1,
       "note": 5,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "4noteon": {
       "channel": 1,
       "note": 4,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "4noteoff": {
       "channel": 1,
       "note": 4,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     },
     "5noteoff": {
       "channel": 1,
       "note": 5,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     },
     "6noteoff": {
       "channel": 1,
       "note": 6,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     },
     "7noteoff": {
       "channel": 1,
       "note": 7,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     }
   },
   "2": {
@@ -279,49 +308,57 @@
       "channel": 2,
       "note": 0,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "1noteon": {
       "channel": 2,
       "note": 1,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "2noteon": {
       "channel": 2,
       "note": 2,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "3noteon": {
       "channel": 2,
       "note": 3,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "2noteoff": {
       "channel": 2,
       "note": 2,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     },
     "1noteoff": {
       "channel": 2,
       "note": 1,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     },
     "3noteoff": {
       "channel": 2,
       "note": 3,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     },
     "0noteoff": {
       "channel": 2,
       "note": 0,
       "velocity": 0,
-      "_type": "noteoff"
+      "_type": "noteoff",
+      "cmds": []
     }
   },
   "5": {
@@ -348,30 +385,7 @@
       "controller": 7,
       "value": 92,
       "_type": "cc",
-      "cmds": [
-        {
-          "_type": "fader",
-          "ar": {
-            "request-type": "SetVolume",
-            "source": "Virtual Sound",
-            "volume": 0.5354
-          },
-          "rn": "SetVolume"
-        },
-        {
-          "_type": "fader",
-          "ar": {
-            "request-type": "SetVolume",
-            "source": "audiotest",
-            "volume": 0.5354
-          },
-          "fn": {
-            "ar": "test string",
-            "f": "testfuc"
-          },
-          "rn": "SetVolume"
-        }
-      ]
+      "cmds": []
     }
   },
   "15": {
@@ -393,13 +407,15 @@
       "channel": 15,
       "note": 1,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     },
     "2noteon": {
       "channel": 15,
       "note": 2,
       "velocity": 127,
-      "_type": "noteon"
+      "_type": "noteon",
+      "cmds": []
     }
   }
 }

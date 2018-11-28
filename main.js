@@ -103,11 +103,15 @@ app.on('ready', function(){
 
 // Handle add item window
 function createMapWindow(data){
-  MapWindow = new BrowserWindow({
+  let MapWindow = new BrowserWindow({
     width: 1000,
     height:500,
-    title:'Mapping Edit'
+    title:'Mapping Edit',
+    webPreferences: {
+    nodeIntegrationInWorker: true
+  }
   });
+
     
   MapWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public/electron/mapWindow.html'),
@@ -287,8 +291,10 @@ ipcMain.on('NC_SET_CONF', (event, data) => {
 ipcMain.on('NC_SET_MAP', (event, data) => {
     //console.log('NC_MAP = ' + data.d.cmds[0]);
     //MIDImapping.set(data);
-     
-    MIDImapping.set(typeselector(data.d), data.d)
+    var device_map = editJsonFile(data.cmd, {
+        autosave: true
+    });
+    device_map.set(typeselector(data.d), data.d)
     //mainWindow.webContents.send('NC_SET_CONF', data );
 })
 
@@ -398,7 +404,7 @@ MD.setDevice = function(data){
         deviceName = deviceName.join(space)
         deviceName = deviceName.toString();
         var dconf = devices_config.get()
-        var n = {"isAlive": true, "domID": PathName, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
+        var n = {"isAlive": true, "mapMode": false, "domID": PathName, "id": devID, "name": deviceName, "MapPath": "./json/mappings/" + PathName + ".json", "fn": "" }
         console.log('var deviceName = ', n);
         devices_config.set(PathName,n); 
     }); 
@@ -481,12 +487,15 @@ MD.MIDI = function(device, data){
                 
                 if(a != undefined){
                     if(boll(a,msg)){
+                        var b = {"data": data, "msg": a}
                         mainWindow.webContents.send('MIDI_Mapping', a );
                         console.log('AAA ', a);
                     }
                 }else{
+                    var b = {"data": data, "msg": msg}
                     console.log(msg);
-                    mainWindow.webContents.send('MIDI_Mapping', msg );
+                    mainWindow.webContents.send('MIDI_Mapping', b );
+                    //mainWindow.webContents.send('MIDI_Mapping', data );
                     device_map.set(i, msg);
                 }
             }

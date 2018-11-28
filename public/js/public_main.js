@@ -166,13 +166,18 @@ function loadMIDIMapping(){
     devicelist1 = [];
     //$('#out').html(conlist1);
     MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
-    DeviceList = ipcRenderer.sendSync('DeviceList')
+    
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
             list('#out', itemm)
         });
     });
+    
+    
+}
 
+function loadDevices(){
+    DeviceList = ipcRenderer.sendSync('DeviceList')
     $.each(DeviceList, function(i, item) {
         var kk = {device: item}
         console.log(item);
@@ -199,7 +204,7 @@ function openfile(data){
 
 function saveMIDIMapping(){
     
-    MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
+    //MIDIMapping = ipcRenderer.sendSync('MIDIMapping')
     
     $.each(MIDIMapping, function(i, item) {
         $.each(item, function(ii, itemm) {
@@ -220,7 +225,7 @@ function saveMIDIMapping(){
             console.log('ch_cmd.value = ' + la)
             console.log(la);
             var mapp = {channel: itemm.channel, note: itemm.note, controller: itemm.controller, velocity: itemm.velocity, _type: itemm._type, cmds: la }
-            console.log(ch_cmd.value);
+            
             console.log(mapp);
             send('NC_SET_MAP','', mapp);
         });
@@ -307,7 +312,7 @@ function list(name, data){
     }
     if(data.MapPath != undefined ){
         console.log('data.device', JSON.stringify(data));
-        var mapObj2 = {openfileID: data.domID, IDName: data.name, MapPath: data.MapPath};
+        var mapObj2 = {openfileID: data.domID, IDName: data.name, MapPath: data.MapPath };
         console.log('mapObj2 ', mapObj2);
         var MIDI_Devices_HTML = replaceAll(model.MIDIDevices, mapObj2 );
         console.log('html ', MIDI_Devices_HTML);             
@@ -395,7 +400,7 @@ var jsonFNtest = {fn:"test"}
 //myNameSpace[jsonFNtest.fn]();
 
 //window[jsonFNtest.fn]();
-
+loadDevices();
 //loadMIDIMapping();
 $( "#buffertime" ).val(conf.replay.buffertime);
 $( "#bufsavet" ).val(conf.replay.bufsavet);

@@ -4,5 +4,5 @@
 "source":"<i id='vissourcename' onclick='send(\"NC_SOURCESW\",\"sourcename\")' class='material-icons md-dark pmd-sm'>visbol</i> sourcename ",
 "option":"<option value='midimapoutselect'>midimapoutselect</option>",
 "MIDIMapping":"<textarea id='midimapid' class=''>midimapouttext</textarea>",
-"MIDIDevices": "<div class='col-xs-12 col-md-6'><p>IDName</p><div class='col-xs-10 col-md-10'><input type='text' value='MapPath' id='openfileID' class='form-control'></div><div class='col-xs-2 col-md-2'><button onclick=' openfile(\"openfileID\")' type='button' class='btn btn-primary'> Öffnen </button ><button onclick='' type='button' class='btn btn-primary'> Edit </button ></div></div>",
+"MIDIDevices": "<div class='col-xs-12 col-md-6'><p>device IDName</p><div class='col-xs-10 col-md-10'><input type='text' value='MapPath' id='openfileID' class='form-control'></div><div class='col-xs-2 col-md-2'><button onclick=' openfile(\"openfileID\")' type='button' class='btn btn-primary'> Öffnen </button ><button onclick='' type='button' class='btn btn-primary'> Edit </button ></div></div>",
 "test": "MapPath hallo hallo"}
