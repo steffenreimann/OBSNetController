@@ -116,9 +116,7 @@ function createMapWindow(data){
   }));
     
   // Handle garbage collection
-  MapWindow.on('close', function(){
-    MapWindow = null;
-  });
+  
 }
  // Create menu template
 const mainMenuTemplate =  [
